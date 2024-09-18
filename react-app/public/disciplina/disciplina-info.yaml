@@ -1,0 +1,13 @@
+aulas:
+  - titulo: "Aula Introdutória"
+    arquivo: "aula-intro.md"
+
+  - titulo: "Revisão do Conteúdo"
+    arquivo: "aula-intro.md"
+
+  - titulo: "Início de Supervisórios"
+    arquivo: "aula-supervisorios.md"
+
+  - titulo: "Teoria de Supervisórios"
+    arquivo: "aula-teoria"
+  

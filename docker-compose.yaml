@@ -1,0 +1,11 @@
+version: '3.7'
+
+services: 
+  servidorweb-c:
+    image: servidorweb
+    container_name: servidorweb_course-website
+    volumes:
+      - ./react-app:/app
+    ports: 
+      - "3000:3000"
+    command: ["/bin/bash", "-c", "npm start"]
