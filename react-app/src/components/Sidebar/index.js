@@ -7,6 +7,7 @@ const Sidebar = () => {
         <ul>
           <li>Aula 1</li>
           <li>Aula 3</li>
+          <li>Exercício Avaliativo</li>
           {/* Adicione mais itens aqui */}
         </ul>
       </aside>

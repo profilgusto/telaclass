@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // For katex support on ReactMarkdown
@@ -10,24 +9,7 @@ import remarkMath from 'remark-math'
 import './style.css'
 import 'katex/dist/katex.min.css'
 
-const Content = () => {
-
-  const [markdownContent, setMarkdownContent] = useState('');
-
-  // loads the markdown file containing the class content
-  useEffect(() => {
-    fetch('/disciplina/aula-teoria.md')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then((text) => setMarkdownContent(text))
-      .catch((error) => {
-        console.error('We could not load the markdown file:', error);
-      });
-  }, []);
+const Content = ({ markdownContent }) => {
 
   return (
     <main className="content">
