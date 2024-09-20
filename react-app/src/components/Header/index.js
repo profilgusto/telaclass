@@ -1,9 +1,9 @@
 import './style.css';
 
-const Header = ( {cursoNome} ) => {
+const Header = ( {disciplinaNome, disciplinaCodigo} ) => {
     return (
       <header className="cabecalho">
-        <h1>Disciplina: {cursoNome}</h1>
+        <h1>Disciplina: {disciplinaCodigo} - {disciplinaNome}</h1>
       </header>
     );
   }
