@@ -2,19 +2,39 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // For katex support on ReactMarkdown
-import {createRoot} from 'react-dom/client'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
+import rehypeRaw from 'rehype-raw';
+
 
 // Import styles
 import './style.css'
 import 'katex/dist/katex.min.css'
 
+// PARAMETERS
+const ATTACHMENTS_PATH = '_attachments/';
+
 const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
+  // Defining states
   const [markdownContent, setMarkdownContent] = useState(null);
 
-  // fetching the content markdown file
+  // Defining functions
+  const treatMarkdownContent = (content) => {
+    const baseUrl = content_url+ATTACHMENTS_PATH;
+
+    // Treating PDF files
+    // TODO - Tratar também quando .PDF está em maiúsculo
+    content = content.replace(/!\[\[(.*?)\.pdf\]\]/g, `<embed src="${baseUrl}$1.pdf" width="600" height="500" type="application/pdf">`);
+    
+    // Treating images
+    // TODO - Pesquisar especificamente por arquivos com final .jpg ou .png ou .jpeg, assim como é feito com .pdf
+    content = content.replace(/!\[\[(.*?)\]\]/g, `![](${baseUrl}$1)`);
+
+    return content
+  };
+
+  // Fetching the content markdown file
   useEffect(() => {
     if (selectedLesson!=null){ // if there is a selected lesson from the sidebar
       const lessonPathMD = content_url + planoDeAulas[selectedLesson].path;
@@ -25,7 +45,7 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
         }
         return response.text();
       })
-      .then((text) => setMarkdownContent(text))
+      .then((text) => setMarkdownContent(treatMarkdownContent(text)))
       .catch((error) => {
         console.error('We could not load the markdown file:', error);
       });
@@ -40,18 +60,19 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     return <main className="content">Selecione uma aula no menu lateral</main>;
   }
 
+  console.log(markdownContent);
 
   return (
     <main className="content">
 
+      <h1>{planoDeAulas[selectedLesson].titulo}</h1>
       <ReactMarkdown 
         remarkPlugins={[remarkMath]} 
-        rehypePlugins={[rehypeKatex]}>
+        rehypePlugins={[rehypeKatex, rehypeRaw]}
+      >
           {markdownContent}
       </ReactMarkdown>
 
-      
-     
     </main>
   );
   }

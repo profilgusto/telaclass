@@ -72,9 +72,8 @@ function App() {
           selectedLesson={selectedLesson} 
           content_url={CONTENT_URL} 
         />
-  
-
       </div>
+      
     </div>
 
   );
