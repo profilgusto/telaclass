@@ -15,7 +15,7 @@ function App() {
 
   const [courseMetadata, setCourseMetadata] = useState(null);
   const [loadingYaml, setLoadingYaml] = useState(true);
-  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [selectedLesson, setSelectedLesson] = useState(0);
 
   // Load do Disciplina YAML file 
   useEffect( () => {
@@ -40,13 +40,6 @@ function App() {
       });
   }, []);
 
-
-  // Debugging
-  //console.log("CP1");
-  //console.log(courseMetadata?.professor.nome);
-  //console.log(loadingYaml);
-  //console.log(selectedLesson)
-
   // Loading screen
   if (loadingYaml) {
     return (
@@ -56,15 +49,25 @@ function App() {
     );
   }
 
+  console.log(selectedLesson);
+
   return (
     <div className="App">
 
-      <Header disciplinaNome={courseMetadata?.disciplina.nome} disciplinaCodigo={courseMetadata?.disciplina.codigo} />
+      <Header 
+        disciplinaNome={courseMetadata?.disciplina.nome}
+        disciplinaCodigo={courseMetadata?.disciplina.codigo}
+        disciplinaAno={courseMetadata?.disciplina.ano}
+        disciplinaSemestre={courseMetadata?.disciplina.semestre}
+        professorNome={courseMetadata?.professor.nome}
+        professorEmail={courseMetadata?.professor.email}
+      />
 
       <div className="container">
         <Sidebar 
           planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
           onSelectLesson={setSelectedLesson} 
+          selectedLesson={selectedLesson}
         />
 
         <Content 

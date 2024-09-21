@@ -1,8 +1,15 @@
 .App {
+  background-color: #1e1e1e;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #b8b9b9;
 }
 
 .container {
   display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 

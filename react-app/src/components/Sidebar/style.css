@@ -1,4 +1,50 @@
+:root {
+  --button-border-radius: 20px;
+  --li-horizontal-margin: 5px;
+}
+
 .sidebar {
     width: 20%;
-    background-color:brown;
+    background-color:#383939;
+    position: fixed;
+    top: 100px;
+    bottom: 0;
+    overflow-y: auto;
+    border-top-right-radius: 30px;
+    /* box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.5); */
   }
+
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-left: var(--li-horizontal-margin);
+  margin-right: var(--li-horizontal-margin);
+}
+
+.sidebar ul li.selected {
+  margin-right: 0px;
+}
+
+.sidebar ul li button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #404141;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: #b8b9b9;
+  border-radius: var(--button-border-radius);
+}
+
+.sidebar ul li button.selected {
+  background-color: #1e1e1e;
+  border-radius: var(--button-border-radius) 0px 0px var(--button-border-radius);
+}

@@ -54,18 +54,22 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     }
   }, [selectedLesson]); 
 
+  // TODO - Consertar o content que tá ficando atrás de header quando o tamanho da tela diminui lateralmente.
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
     return <main className="content">Selecione uma aula no menu lateral</main>;
   }
 
-  console.log(markdownContent);
-
   return (
     <main className="content">
 
-      <h1>{planoDeAulas[selectedLesson].titulo}</h1>
+      <h1 
+        className="classTitle"
+      >
+        {planoDeAulas[selectedLesson].titulo}
+      </h1>
+      
       <ReactMarkdown 
         remarkPlugins={[remarkMath]} 
         rehypePlugins={[rehypeKatex, rehypeRaw]}

@@ -24,9 +24,8 @@ appExpress.get('/disciplina.yaml', (req, res) => {
   res.sendFile(_pathToDisciplinaYaml);
 });
 
-
-
-appExpress.listen(PORT, () => {
+// starting the server
+appExpress.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
 

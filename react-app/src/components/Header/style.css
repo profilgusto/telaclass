@@ -1,3 +1,26 @@
+:root {
+  --border-radius: 30px;
+}
+
 .cabecalho {
-    background-color:rgb(42, 93, 165);
-  }
+  background-color:#383939;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.5);
+}
+
+.cabecalho h1 {
+  font-size: 25px;
+  margin: 10px 0px;
+  padding: 0;
+}
+
+.cabecalho h2 {
+  font-size: 20px;
+  margin: 10px 0px;
+  padding: 0;
+}
