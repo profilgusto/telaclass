@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import { MDXProvider } from '@mdx-js/react';
+import MyMDXContent from './test.mdx';
+
 // Import styles
 import './style.css'
 
@@ -61,6 +64,15 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
       >
         {planoDeAulas[selectedLesson].titulo}
       </h1>
+
+      
+      <MDXProvider>
+         
+        <MyMDXContent />
+        
+      </MDXProvider>
+
+      
 
     </main>
   );
