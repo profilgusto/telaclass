@@ -6,25 +6,9 @@ services:
     image: telaclass-i
     container_name: telaclass_react-app-c
     volumes:
-      - ./react-app:/app/react-app
-    ports: 
-      - "3000:3000"
-    command: ["/bin/bash", "-c", "cd /app/react-app && npm install && npm start"]
-
-  telaclass_content-server-api:
-    build:
-      context: . 
-      dockerfile: Dockerfile
-    image: telaclass-i
-    container_name: telaclass_content-server-api-c
-    volumes:
-      - ./content-server-api:/app/content-server-api
-      # the path to the discipline's obsidian vault folder
-      # ATUALIZAR ESTE PATH
+      - ./react-app:/app
       - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/content-telaclass
     ports: 
-      - "3001:3001"
-    command: ["/bin/bash", "-c", "cd /app/content-server-api && npm install && node content-server.js"]
+      - "3000:3000"
+    command: ["/bin/bash", "-c", "npm install && npm start"]
 
-
-    
