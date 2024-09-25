@@ -23,8 +23,6 @@ services:
       # ATUALIZAR ESTE PATH
       - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/content-telaclass
     ports: 
-      - "3001:3001"
-    command: ["/bin/bash", "-c", "cd /app/content-server-api && npm install && node content-server.js"]
+      - "3000:3000"
+    command: ["/bin/bash", "-c", "npm install && npm start"]
 
-
-    
