@@ -1,7 +1,6 @@
 import './style.css'
 
 const Sidebar = ( {planoDeAulas, onSelectLesson, selectedLesson} ) => {
-    //console.log(selectedLesson);
     return (
       <aside className="sidebar">
         <h2>Conteúdo</h2>      

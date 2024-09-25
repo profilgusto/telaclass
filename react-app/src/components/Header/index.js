@@ -1,5 +1,7 @@
 import './style.css';
 
+// TODO - Consertar o styles do header pois ele está ficando sobre o sidebar e content quando a largura do navegador diminui muito
+
 const Header = ( {disciplinaNome, 
                   disciplinaCodigo, 
                   disciplinaSemestre,
@@ -14,5 +16,7 @@ const Header = ( {disciplinaNome,
       </header>
     );
   }
+
+
   
   export default Header
