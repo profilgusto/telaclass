@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-
-// For katex support on ReactMarkdown
-import rehypeKatex from 'rehype-katex'
-import remarkMath from 'remark-math'
-import rehypeRaw from 'rehype-raw';
-
 
 // Import styles
 import './style.css'
-import 'katex/dist/katex.min.css'
 
 // PARAMETERS
-const ATTACHMENTS_PATH = '_attachments/';
+const ATTACHMENTS_PATH = '_assets/';
 
 const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
@@ -69,13 +61,6 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
       >
         {planoDeAulas[selectedLesson].titulo}
       </h1>
-      
-      <ReactMarkdown 
-        remarkPlugins={[remarkMath]} 
-        rehypePlugins={[rehypeKatex, rehypeRaw]}
-      >
-          {markdownContent}
-      </ReactMarkdown>
 
     </main>
   );

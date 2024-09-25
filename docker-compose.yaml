@@ -21,7 +21,7 @@ services:
       - ./content-server-api:/app/content-server-api
       # the path to the discipline's obsidian vault folder
       # ATUALIZAR ESTE PATH
-      - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/obsidian/content_supervisorios:/app/obsidian-content
+      - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/content-telaclass
     ports: 
       - "3001:3001"
     command: ["/bin/bash", "-c", "cd /app/content-server-api && npm install && node content-server.js"]
