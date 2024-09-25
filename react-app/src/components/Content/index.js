@@ -65,11 +65,9 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
         {planoDeAulas[selectedLesson].titulo}
       </h1>
 
-      
+      {/* MarkdownExtended content */}
       <MDXProvider>
-         
         <MyMDXContent />
-        
       </MDXProvider>
 
       
