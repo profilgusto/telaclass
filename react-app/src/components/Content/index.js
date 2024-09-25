@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { MDXProvider } from '@mdx-js/react';
+import { compile } from '@mdx-js/react';
+import { run } from '@mdx-js/mdx'
+
+import MDXRenderer from '../MdxRenderer';
+
+// Deleteme plzzz
 import MyMDXContent from './test.mdx';
 
 // Import styles
@@ -12,9 +18,27 @@ const ATTACHMENTS_PATH = '_assets/';
 const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
   // Defining states
-  const [markdownContent, setMarkdownContent] = useState(null);
+  const [mdxContent, setMdxContent] = useState(null);
 
+  useEffect(() => {
+    const fetchMdx = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/01_introducao.mdx');
+        const data = await response.text();
+        setMdxContent(data);
+      } catch (error) {
+        console.error('Error fetching the MDX file:', error);
+      }
+    };
+    fetchMdx();
+  }, []);
+
+  //console.log(mdxContent);
+
+
+  
   // Defining functions
+  /*
   const treatMarkdownContent = (content) => {
     const baseUrl = content_url+ATTACHMENTS_PATH;
 
@@ -27,9 +51,10 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     content = content.replace(/!\[\[(.*?)\]\]/g, `![](${baseUrl}$1)`);
 
     return content
-  };
+  }; */
 
   // Fetching the content markdown file
+  /*
   useEffect(() => {
     if (selectedLesson!=null){ // if there is a selected lesson from the sidebar
       const lessonPathMD = content_url + planoDeAulas[selectedLesson].path;
@@ -49,6 +74,8 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     }
   }, [selectedLesson]); 
 
+  */
+
   // TODO - Consertar o content que tá ficando atrás de header quando o tamanho da tela diminui lateralmente.
 
   // Caso ainda não haja nada selecionado...
@@ -66,11 +93,29 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
       </h1>
 
       
+      
       <MDXProvider>
-         
         <MyMDXContent />
-        
       </MDXProvider>
+      
+
+      <h1>======OOOOO</h1>
+
+      <MDXRenderer mdxContent={mdxContent} />
+
+      {/* 
+
+      <MDXProvider>
+      <div>
+        {mdxContent ? (
+          <div>{mdx(mdxContent)}</div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </MDXProvider>
+
+    */}
 
       
 

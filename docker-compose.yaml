@@ -6,10 +6,10 @@ services:
     image: telaclass-i
     container_name: telaclass_react-app-c
     volumes:
-      - ./react-app:/app/react-app
+      - ./react-app:/app
     ports: 
       - "3000:3000"
-    command: ["/bin/bash", "-c", "cd /app/react-app && npm install && npm start"]
+    command: ["/bin/bash", "-c", "npm install && npm start"]
 
   telaclass_content-server-api:
     build:
