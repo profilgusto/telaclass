@@ -8,6 +8,9 @@ import { MDXProvider } from '@mdx-js/react';
 import { compile, run } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime'
 
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github-dark.css';
+
 const MDXRenderer = ({ mdxContent }) => {
   const [content, setContent] = useState(null);
 
@@ -21,6 +24,15 @@ const MDXRenderer = ({ mdxContent }) => {
     renderMDX();
   }, [mdxContent]);
 
+  // adicionando o highlight
+  useEffect(() => {
+    if (content) {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    }
+  }, [content]);
+  
   return <MDXProvider>{content}</MDXProvider>;
 };
 

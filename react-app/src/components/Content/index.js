@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { MDXProvider } from '@mdx-js/react';
-import { compile } from '@mdx-js/react';
-import { run } from '@mdx-js/mdx'
-
 import MDXRenderer from '../MdxRenderer';
-
-// Deleteme plzzz
-import MyMDXContent from './test.mdx';
 
 // Import styles
 import './style.css'
@@ -20,22 +13,26 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
   // Defining states
   const [mdxContent, setMdxContent] = useState(null);
 
+
   // Fetching the MDX file
   useEffect(() => {
     const fetchMdx = async () => {
-      try {
-        // TODO - Usar o seletor de aula para dar fetch no arquivo correto de aula
-        const response = await fetch('http://localhost:3001/01_introducao.mdx');
-        const data = await response.text();
-        setMdxContent(data);
-      } catch (error) {
-        console.error('Error fetching the MDX file:', error);
+      if (selectedLesson != null && planoDeAulas[selectedLesson]) {
+        try {
+          const response = await fetch(content_url+'/' + planoDeAulas[selectedLesson].arquivo);
+          const data = await response.text();
+          setMdxContent(data);
+        } catch (error) {
+          console.error('Error fetching the MDX file:', error);
+        }  
+      } else {
+        setMdxContent("Problema ao carregar o arquivo .mdx");
       }
     };
     fetchMdx();
-  }, []);
+  }, [selectedLesson]);
 
-  // TODO - Tratar no mdx importado as figuras e etc
+  console.log(selectedLesson)
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
@@ -53,6 +50,10 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
     </main>
   );
+
+
+
+
   }
 
   export default Content

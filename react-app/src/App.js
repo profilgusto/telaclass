@@ -8,18 +8,20 @@ import Content from './components/Content';
 import './App.css';
 
 // PARAMETERS
-const CONTENT_URL = 'http://localhost:3001/';
+const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
 function App() {
 
   const [courseMetadata, setCourseMetadata] = useState(null);
   const [loadingYaml, setLoadingYaml] = useState(true);
-  const [selectedLesson, setSelectedLesson] = useState(0);
+
+  // TODO - Definir o selectedLesson com o 'null' inicialmente
+  const [selectedLesson, setSelectedLesson] = useState(1);
 
   // Load do Disciplina YAML file 
   useEffect( () => {
-    fetch(`${CONTENT_URL}disciplina.yaml`)
+    fetch(`${CONTENT_URL}/_disciplina.yaml`)
       .then( (response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
