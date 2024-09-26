@@ -15,7 +15,7 @@ function App() {
 
   const [courseMetadata, setCourseMetadata] = useState(null);
   const [loadingYaml, setLoadingYaml] = useState(true);
-  const [selectedLesson, setSelectedLesson] = useState(0);
+  const [selectedLesson, setSelectedLesson] = useState(null);
 
   // Load do Disciplina YAML file 
   useEffect( () => {

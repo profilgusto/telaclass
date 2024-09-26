@@ -20,22 +20,24 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
   // Defining states
   const [mdxContent, setMdxContent] = useState(null);
 
+
   // Fetching the MDX file
   useEffect(() => {
     const fetchMdx = async () => {
-      try {
-        // TODO - Usar o seletor de aula para dar fetch no arquivo correto de aula
-        const response = await fetch(content_url+'/01_introducao.mdx');
-        const data = await response.text();
-        setMdxContent(data);
-      } catch (error) {
-        console.error('Error fetching the MDX file:', error);
+      if (selectedLesson != null && planoDeAulas[selectedLesson]) {
+        try {
+          const response = await fetch(content_url+'/' + planoDeAulas[selectedLesson].arquivo);
+          const data = await response.text();
+          setMdxContent(data);
+        } catch (error) {
+          console.error('Error fetching the MDX file:', error);
+        }  
+      } else {
+        setMdxContent("Problema ao carregar o arquivo .mdx");
       }
     };
     fetchMdx();
-  }, []);
-
-  // TODO - Tratar no mdx importado as figuras e etc
+  }, [selectedLesson]);
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
@@ -53,6 +55,10 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
     </main>
   );
+
+
+
+
   }
 
   export default Content
