@@ -39,6 +39,8 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     fetchMdx();
   }, [selectedLesson]);
 
+  console.log(selectedLesson)
+
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
     return <main className="content">Selecione uma aula no menu lateral</main>;
