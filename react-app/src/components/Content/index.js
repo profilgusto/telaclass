@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { MDXProvider } from '@mdx-js/react';
-import { compile } from '@mdx-js/react';
-import { run } from '@mdx-js/mdx'
-
 import MDXRenderer from '../MdxRenderer';
-
-// Deleteme plzzz
-import MyMDXContent from './test.mdx';
 
 // Import styles
 import './style.css'

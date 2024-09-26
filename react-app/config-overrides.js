@@ -12,9 +12,4 @@ module.exports = override(
       }
     ]
   }),
-  addWebpackModuleRule({
-    devServer: {
-      hot: true, 
-    }
-  }),
 );
