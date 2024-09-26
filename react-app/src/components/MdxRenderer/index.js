@@ -33,7 +33,6 @@ const MDXRenderer = ({ mdxContent }) => {
     }
   }, [content]);
   
-
   return <MDXProvider>{content}</MDXProvider>;
 };
 

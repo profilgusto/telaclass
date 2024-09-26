@@ -57,9 +57,16 @@
 }
 
 .content pre code {
+  background-color: black;
   border-radius: 15px;
-  padding: 3px;
+  padding: 20px;
   text-align: left;
   overflow-x: auto;
   font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.content code {
+  background-color: black;
+  padding: 2px 3px 2px 3px;
+  border-radius: 5px;
 }
