@@ -8,7 +8,7 @@ import Content from './components/Content';
 import './App.css';
 
 // PARAMETERS
-const CONTENT_URL = 'http://localhost:3001/';
+const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   // Load do Disciplina YAML file 
   useEffect( () => {
-    fetch(`${CONTENT_URL}disciplina.yaml`)
+    fetch(`${CONTENT_URL}/_disciplina.yaml`)
       .then( (response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

@@ -25,7 +25,7 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     const fetchMdx = async () => {
       try {
         // TODO - Usar o seletor de aula para dar fetch no arquivo correto de aula
-        const response = await fetch('http://localhost:3001/01_introducao.mdx');
+        const response = await fetch(content_url+'/01_introducao.mdx');
         const data = await response.text();
         setMdxContent(data);
       } catch (error) {
