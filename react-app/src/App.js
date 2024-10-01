@@ -8,6 +8,7 @@ import Content from './components/Content';
 import './App.css';
 
 // PARAMETERS
+const APP_URL = 'http://localhost:3000';
 const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
