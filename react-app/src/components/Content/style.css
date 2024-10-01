@@ -1,72 +1,98 @@
-:root {
-  --content-lateral-margin: 20%;
+.main-div {
+  position: absolute;
+  z-index: 1;
+
+  top: 100px;
+  margin-left: 220px;
+  margin-right: 20px;
+
+  min-width: 500px;
 }
 
-.content {
-  background-color: #1e1e1e;
-  flex: 1;
-  padding: 0%;
-  margin: 80px 5% 50px 22%;
-  overflow-y: auto;
-  height: calc(100vh - 85px);
-}
-
-.content .classTitle{
+.class-title{
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
+  margin-bottom: -80px;
 }
 
-.content h1 {
+
+.class-content {
   color: #b8b9b9;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.class-content h1 {
   font-size: 28px;
   text-align: left;
-  text-indent: 0px;
+  margin-left: 20px;
+  margin-top: 120px; 
+  
 }
 
-.content h2 {
-  color: #b8b9b9;
+.class-content h2 {
   font-size: 24px;
   text-align: left;
-  text-indent: 10px;
+  margin-left: 20px;
 }
 
-.content h3 {
-  color: #b8b9b9;
+.class-content h3 {
   font-size: 20px;
   text-align: left;
-  text-indent: 20px;
+  margin-left: 20px;
 }
 
-.content p {
-  color: #b8b9b9;
+.class-content p {
   font-size: 18px;
+  margin-left: 20px;
+  text-indent: 40px;
   text-align: justify;
-  text-indent: 30px;
 }
 
-.content img {
-  width: 100%; 
-  height: auto;
-  max-width: 100%;
-}
-
-.content embed {
-  width: 100%; 
-  height: 600px;
-  max-width: 100%;
-}
-
-.content pre code {
+.class-content pre code {
   background-color: black;
-  border-radius: 15px;
   padding: 20px;
-  text-align: left;
+
+  border-radius: 15px;
+
+  max-height: 600px;
+  overflow-y: auto;
+
+  max-width: 700px;
   overflow-x: auto;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  display: block;
+  margin: 0 auto;
 }
 
-.content code {
+.class-content code {
   background-color: black;
-  padding: 2px 3px 2px 3px;
-  border-radius: 5px;
+  padding: 4px 7px 4px 7px;
+  border-radius: 10px;
+}
+
+.class-content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+/* Para equações em linha própra */
+.class-content .katex-display{
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  
+  background-color: black;
+  padding: 15px;
+  border-radius: 10px;
+
+}
+
+/* Para equações inline */
+.class-content .katex:not(.katex-display .katex) {
+  background-color: rgb(0, 0, 0);
+  padding: 4px 7px 4px 7px;
+  border-radius: 10px;
 }

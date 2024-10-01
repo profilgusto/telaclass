@@ -8,6 +8,7 @@ import Content from './components/Content';
 import './App.css';
 
 // PARAMETERS
+const APP_URL = 'http://localhost:3000';
 const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
@@ -52,9 +53,8 @@ function App() {
   }
 
   return (
-    <div className="App">
-
-      <Header 
+    <div >
+      <Header
         disciplinaNome={courseMetadata?.disciplina.nome}
         disciplinaCodigo={courseMetadata?.disciplina.codigo}
         disciplinaAno={courseMetadata?.disciplina.ano}
@@ -63,22 +63,18 @@ function App() {
         professorEmail={courseMetadata?.professor.email}
       />
 
-      <div className="container">
-        <Sidebar 
-          planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
-          onSelectLesson={setSelectedLesson} 
-          selectedLesson={selectedLesson}
-        />
+      <Sidebar
+        planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
+        onSelectLesson={setSelectedLesson} 
+        selectedLesson={selectedLesson}
+      />    
 
-        <Content 
-          planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
-          selectedLesson={selectedLesson} 
-          content_url={CONTENT_URL} 
-        />
-      </div>
-      
+      <Content
+        planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
+        selectedLesson={selectedLesson} 
+        content_url={CONTENT_URL} 
+      />
     </div>
-
   );
 }
 
