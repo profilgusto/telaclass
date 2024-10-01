@@ -6,8 +6,7 @@ services:
     image: telaclass-i
     container_name: telaclass_react-app-c
     volumes:
-      - ./react-app:/app
-      - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/public/content-telaclass
+      - /home/filgusto/app-telaclass/react-app:/app
      # - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/public/content-telaclass
     ports: 
       - "3000:3000"

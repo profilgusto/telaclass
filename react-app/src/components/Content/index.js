@@ -32,7 +32,6 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
     fetchMdx();
   }, [selectedLesson]);
 
-  console.log(selectedLesson)
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
@@ -40,15 +39,27 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
   }
 
   return (
-    <main className="content">
+    <div className="main-div">
 
-      <h1 className="classTitle">
-        {planoDeAulas[selectedLesson].titulo}
-      </h1>
+      <div className="class-title">
+        <h1>{planoDeAulas[selectedLesson].titulo}</h1>
+      </div>
+
+      <div className="class-content">
+        <h1>Teste título 1</h1>
+        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
+        <h2>Teste título 1</h2>
+        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
+        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
+      </div>
+
+      {/* 
 
       <MDXRenderer mdxContent={mdxContent} />    
 
-    </main>
+      */}
+
+    </div>
   );
 
 

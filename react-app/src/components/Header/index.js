@@ -10,9 +10,23 @@ const Header = ( {disciplinaNome,
                   professorEmail
                 } ) => {
     return (
-      <header className="cabecalho">
-        <h1>{disciplinaCodigo} - {disciplinaNome} - {disciplinaAno}/{disciplinaSemestre}</h1>
-        <h2>Prof. {professorNome} - {professorEmail}</h2>
+      <header className="header">
+
+
+        <div className="box-left">
+          <img src="/assets/logo-ufsj.svg" alt="logo ufsj" className="logo-ufsj" />
+        </div>
+
+        <div  className="box-center">
+          <h1>{disciplinaCodigo} - {disciplinaNome} - {disciplinaAno}/{disciplinaSemestre}</h1>
+          <h2>Prof. {professorNome} - {professorEmail}</h2>
+        </div>
+
+        <div className="box-right">
+          <img src="/assets/logo-detem.svg" alt="logo ufsj" className="logo-ufsj" />
+        </div>
+
+
       </header>
     );
   }

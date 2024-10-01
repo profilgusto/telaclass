@@ -3,7 +3,7 @@ import './style.css'
 const Sidebar = ( {planoDeAulas, onSelectLesson, selectedLesson} ) => {
     return (
       <aside className="sidebar">
-        <h2>Conteúdo</h2>      
+        <h1>Conteúdo</h1>      
         <ul>
           {planoDeAulas.map((aula, index) => (
             <li 

@@ -1,16 +1,17 @@
-.App {
+html, body {
   background-color: #1e1e1e;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   color: #b8b9b9;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-.container {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  height: 100vh;
-}
+
+
+
+
+
+
 

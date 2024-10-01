@@ -1,26 +1,64 @@
-:root {
-  --border-radius: 30px;
-}
-
-.cabecalho {
+.header {
   background-color:#383939;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.5);
+  
+  width: 100%;
+  height: 80px;
+  min-width: 750px;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.5);
+
+  position: fixed;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cabecalho h1 {
-  font-size: 25px;
-  margin: 10px 0px;
+.box-left {
+  margin-left: 5%;
+  flex: 1;
+}
+
+.box-left .logo-ufsj {
+  height: 60px;
+  width: auto;
+}
+
+.box-center {
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  text-align: center;
+  padding: 0px;
+  margin: 0 auto;
+  position: absolute;
+  min-width: 350px;
+}
+
+.box-center h1 {
+  font-size: 16px;
   padding: 0;
 }
 
-.cabecalho h2 {
-  font-size: 20px;
-  margin: 10px 0px;
+.box-center h2 {
+  font-size: 12px;
   padding: 0;
 }
+
+
+.box-right {
+  flex: 1;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.box-right .logo-ufsj {
+  height: 60px;
+  width: auto;
+}
+
+

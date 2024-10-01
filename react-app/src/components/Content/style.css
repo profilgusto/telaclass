@@ -1,62 +1,48 @@
-:root {
-  --content-lateral-margin: 20%;
+.main-div {
+  position: absolute;
+  z-index: 1;
+
+  top: 100px;
+  margin-left: 220px;
+  margin-right: 20px;
 }
 
-.content {
-  background-color: #1e1e1e;
-  flex: 1;
-  padding: 0%;
-  margin: 80px 5% 50px 22%;
-  overflow-y: auto;
-  height: calc(100vh - 85px);
-}
-
-.content .classTitle{
+.class-title{
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
 }
 
-.content h1 {
+
+.class-content h1 {
   color: #b8b9b9;
   font-size: 28px;
   text-align: left;
-  text-indent: 0px;
+  text-indent: 10px;
 }
 
-.content h2 {
+.class-content h2 {
   color: #b8b9b9;
   font-size: 24px;
   text-align: left;
   text-indent: 10px;
 }
 
-.content h3 {
+.class-content h3 {
   color: #b8b9b9;
   font-size: 20px;
   text-align: left;
   text-indent: 20px;
 }
 
-.content p {
+.class-content p {
   color: #b8b9b9;
   font-size: 18px;
   text-align: justify;
   text-indent: 30px;
 }
 
-.content img {
-  width: 100%; 
-  height: auto;
-  max-width: 100%;
-}
 
-.content embed {
-  width: 100%; 
-  height: 600px;
-  max-width: 100%;
-}
-
-.content pre code {
+.class-content pre code {
   background-color: black;
   border-radius: 15px;
   padding: 20px;
@@ -65,7 +51,7 @@
   font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-.content code {
+.class-content code {
   background-color: black;
   padding: 2px 3px 2px 3px;
   border-radius: 5px;
