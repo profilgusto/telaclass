@@ -5,28 +5,37 @@ import MDXRenderer from '../MdxRenderer';
 // Import styles
 import './style.css'
 
-// PARAMETERS
-const ATTACHMENTS_PATH = '_assets/';
+
+/* SUPPORT FUNCTIONS */
+const fixMdx = (data, contentBaseUrl) => {
+  // Fixes things in the MDX raw file
+
+  // Fixing the images path to URI, replacing relative local path `./` to the public folder `/` path in React app
+  data = data.replace(/\.\//g, contentBaseUrl+`/`);
+
+  return data;
+}
 
 const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
   // Defining states
   const [mdxContent, setMdxContent] = useState(null);
 
-
   // Fetching the MDX file
   useEffect(() => {
     const fetchMdx = async () => {
       if (selectedLesson != null && planoDeAulas[selectedLesson]) {
         try {
-          const response = await fetch(content_url+'/' + planoDeAulas[selectedLesson].arquivo);
-          const data = await response.text();
+          const pathToMdxResource = content_url+'/' + planoDeAulas[selectedLesson].path;
+          const response = await fetch(pathToMdxResource);
+          const data = fixMdx(await response.text(), content_url);
           setMdxContent(data);
         } catch (error) {
           console.error('Error fetching the MDX file:', error);
+          setMdxContent('Erro ao carregar o arquivo .mdx [2]')
         }  
       } else {
-        setMdxContent("Problema ao carregar o arquivo .mdx");
+        setMdxContent("Problema ao carregar o arquivo .mdx [1]");
       }
     };
     fetchMdx();
@@ -35,7 +44,11 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
-    return <main className="content">Selecione uma aula no menu lateral</main>;
+    return (
+      <div className="main-div">
+        <h1>Selecione uma aula no menu lateral</h1>
+      </div>
+    );
   }
 
   return (
@@ -45,26 +58,10 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
         <h1>{planoDeAulas[selectedLesson].titulo}</h1>
       </div>
 
-      <div className="class-content">
-        <h1>Teste título 1</h1>
-        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
-        <h2>Teste título 1</h2>
-        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
-        <p>Mussum Ipsum, cacilds vidis litro abertis.  Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Bota 1 metro de cachacis aí pra viagem! Mé faiz elementum girarzis, nisi eros vermeio.</p>
-      </div>
-
-      {/* 
-
       <MDXRenderer mdxContent={mdxContent} />    
-
-      */}
 
     </div>
   );
-
-
-
-
   }
 
   export default Content

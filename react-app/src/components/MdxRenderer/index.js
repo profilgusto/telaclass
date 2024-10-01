@@ -14,6 +14,8 @@ import 'highlight.js/styles/github-dark.css';
 const MDXRenderer = ({ mdxContent }) => {
   const [content, setContent] = useState(null);
 
+  //console.log("CP1");
+
   useEffect(() => {
     const renderMDX = async () => {
       const compiled = await compile(await mdxContent, { outputFormat: 'function-body' });
@@ -27,9 +29,21 @@ const MDXRenderer = ({ mdxContent }) => {
   // adicionando o highlight
   useEffect(() => {
     if (content) {
+
+      // TODO ESTOU AQUI
+      //console.log("CP2");
+      //console.log(content);
+      //console.log("CP3");
+      //console.log(<MDXProvider>{content}</MDXProvider>);
+      // TODO rever isto daqui. Deve-se procurar por todos 'pre code' apenas dentro de content
+      // do jeito que está agora está fazendo para toda a página web
+
+      // Highlighting the code blocks
       document.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightBlock(block);
       });
+
+
     }
   }, [content]);
   
