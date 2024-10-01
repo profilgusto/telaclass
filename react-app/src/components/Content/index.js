@@ -58,7 +58,9 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
         <h1>{planoDeAulas[selectedLesson].titulo}</h1>
       </div>
 
-      <MDXRenderer mdxContent={mdxContent} />    
+      <div className='class-content'>
+        <MDXRenderer mdxContent={mdxContent} />
+      </div>    
 
     </div>
   );

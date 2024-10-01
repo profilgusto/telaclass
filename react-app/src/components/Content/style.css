@@ -13,46 +13,49 @@
 }
 
 
-.class-content h1 {
+.class-content {
   color: #b8b9b9;
+}
+
+.class-content h1 {
   font-size: 28px;
   text-align: left;
   text-indent: 10px;
 }
 
 .class-content h2 {
-  color: #b8b9b9;
   font-size: 24px;
   text-align: left;
   text-indent: 10px;
 }
 
 .class-content h3 {
-  color: #b8b9b9;
   font-size: 20px;
   text-align: left;
   text-indent: 20px;
 }
 
 .class-content p {
-  color: #b8b9b9;
   font-size: 18px;
   text-align: justify;
   text-indent: 30px;
 }
 
-
 .class-content pre code {
   background-color: black;
   border-radius: 15px;
   padding: 20px;
-  text-align: left;
-  overflow-x: auto;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  max-height: 600px;
+  overflow-y: auto;
+
+  max-width: 80vh;
+
+  margin-left: 60px; 
 }
 
 .class-content code {
   background-color: black;
-  padding: 2px 3px 2px 3px;
-  border-radius: 5px;
+  padding: 4px 5px 4px 5px;
+  border-radius: 10px;
 }
