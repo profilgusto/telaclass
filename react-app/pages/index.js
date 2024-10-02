@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import yaml, { load } from 'js-yaml';
+import React, { useState } from 'react';
+import yaml from 'js-yaml';
+import fs from 'fs';
+import path from 'path';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -7,7 +9,6 @@ import Content from '../components/Content';
 
 // PARAMETERS
 const CONTENT_URL = '/content-telaclass';
-const NEXT_PUBLIC_BASE_URL = 'http://localhost:3000';
 
 // MAIN FUNCTION
 function Home({courseMetadata, loadingYaml}) {
@@ -53,21 +54,13 @@ function Home({courseMetadata, loadingYaml}) {
     let flagLoadingYaml = true;
     let data = null;
 
-    const disciplinaYamlPath = `${NEXT_PUBLIC_BASE_URL}${CONTENT_URL}/_disciplina.yaml`;
-    
     try {
-      const response = await fetch(disciplinaYamlPath);
+      // load yaml file
+      const disciplinaYamlPath = path.join(process.cwd(), 'public', CONTENT_URL, '_disciplina.yaml');
+      const fileContents = fs.readFileSync(disciplinaYamlPath, 'utf8');
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok when loading _disciplina.yaml.');
-      }
-
-      const text = await response.text();
-      if (!text) {
-        throw new Error('There was a problem when converting to text the fetched disciplina.yaml. The YAML file is empty or with broken characters (or something else).');
-      }
-
-      data = yaml.load(text);
+      // parse its content
+      data = yaml.load(fileContents);
       flagLoadingYaml = false;
     } catch (error) {
       console.error('We could not load the disciplina YAML file: Error message is:', error);
