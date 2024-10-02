@@ -1,9 +1,8 @@
-:root {
-  --button-border-radius: 20px;
-  --li-horizontal-margin: 5px;
-}
 
 .sidebar {
+  --button-border-radius: 20px;
+  --li-horizontal-margin: 5px;
+
   position: fixed;
   z-index: 2;
   top: 100px;

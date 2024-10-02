@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MDXRenderer from '../MdxRenderer';
 
 // Import styles
-import './style.css'
+import styles from './style.module.css';
 
 
 /* SUPPORT FUNCTIONS */
@@ -45,20 +45,20 @@ const Content = ({ planoDeAulas, selectedLesson, content_url }) => {
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
     return (
-      <div className="main-div">
+      <div className={styles.mainDiv}>
         <h1>Selecione uma aula no menu lateral</h1>
       </div>
     );
   }
 
   return (
-    <div className="main-div">
+    <div className={styles.mainDiv}>
 
-      <div className="class-title">
+      <div className={styles.classTitle}>
         <h1>{planoDeAulas[selectedLesson].titulo}</h1>
       </div>
 
-      <div className='class-content'>
+      <div className={styles.classContent}>
         <MDXRenderer mdxContent={mdxContent} />
       </div>    
 

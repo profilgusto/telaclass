@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import yaml from 'js-yaml';
 
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Content from './components/Content';
-
-import './App.css';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import Content from '../components/Content';
 
 // PARAMETERS
-const APP_URL = 'http://localhost:3000';
 const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
-function App() {
+function Home() {
 
   const [courseMetadata, setCourseMetadata] = useState(null);
   const [loadingYaml, setLoadingYaml] = useState(true);
-
-  // TODO - Definir o selectedLesson com o 'null' inicialmente
   const [selectedLesson, setSelectedLesson] = useState(0);
 
   // Load do Disciplina YAML file 
@@ -78,4 +73,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
