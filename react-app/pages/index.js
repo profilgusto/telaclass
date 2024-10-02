@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import yaml from 'js-yaml';
+import fs from 'fs';
+import path from 'path';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -9,34 +11,8 @@ import Content from '../components/Content';
 const CONTENT_URL = '/content-telaclass';
 
 // MAIN FUNCTION
-function Home() {
-
-  const [courseMetadata, setCourseMetadata] = useState(null);
-  const [loadingYaml, setLoadingYaml] = useState(true);
+function Home({courseMetadata, loadingYaml}) {
   const [selectedLesson, setSelectedLesson] = useState(0);
-
-  // Load do Disciplina YAML file 
-  useEffect( () => {
-    fetch(`${CONTENT_URL}/_disciplina.yaml`)
-      .then( (response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then( (text) => {
-        if (!text) {
-          throw new Error('The YAML file is empty or with broken characters.');
-        }
-        const data = yaml.load(text);
-        setCourseMetadata(data);
-        setLoadingYaml(false);
-
-      })
-      .catch( (error) => {
-        console.error('We could not load the YAML file: Error message is:', error);
-      });
-  }, []);
 
   // Loading screen
   if (loadingYaml) {
@@ -72,5 +48,30 @@ function Home() {
     </div>
   );
 }
+
+  // Método para o fetch de arquivos de forma estática no Next
+  export async function getStaticProps() {
+    let flagLoadingYaml = true;
+    let data = null;
+
+    try {
+      // load yaml file
+      const disciplinaYamlPath = path.join(process.cwd(), 'public', CONTENT_URL, '_disciplina.yaml');
+      const fileContents = fs.readFileSync(disciplinaYamlPath, 'utf8');
+
+      // parse its content
+      data = yaml.load(fileContents);
+      flagLoadingYaml = false;
+    } catch (error) {
+      console.error('We could not load the disciplina YAML file: Error message is:', error);
+    }
+
+    return {
+      props: {
+        courseMetadata: data,
+        loadingYaml: flagLoadingYaml,
+      },
+    };
+  }
 
 export default Home;
