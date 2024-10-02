@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import yaml from 'js-yaml';
+import yaml, { load } from 'js-yaml';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -7,36 +7,11 @@ import Content from '../components/Content';
 
 // PARAMETERS
 const CONTENT_URL = '/content-telaclass';
+const NEXT_PUBLIC_BASE_URL = 'http://localhost:3000';
 
 // MAIN FUNCTION
-function Home() {
-
-  const [courseMetadata, setCourseMetadata] = useState(null);
-  const [loadingYaml, setLoadingYaml] = useState(true);
+function Home({courseMetadata, loadingYaml}) {
   const [selectedLesson, setSelectedLesson] = useState(0);
-
-  // Load do Disciplina YAML file 
-  useEffect( () => {
-    fetch(`${CONTENT_URL}/_disciplina.yaml`)
-      .then( (response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then( (text) => {
-        if (!text) {
-          throw new Error('The YAML file is empty or with broken characters.');
-        }
-        const data = yaml.load(text);
-        setCourseMetadata(data);
-        setLoadingYaml(false);
-
-      })
-      .catch( (error) => {
-        console.error('We could not load the YAML file: Error message is:', error);
-      });
-  }, []);
 
   // Loading screen
   if (loadingYaml) {
@@ -72,5 +47,38 @@ function Home() {
     </div>
   );
 }
+
+  // Método para o fetch de arquivos de forma estática no Next
+  export async function getStaticProps() {
+    let flagLoadingYaml = true;
+    let data = null;
+
+    const disciplinaYamlPath = `${NEXT_PUBLIC_BASE_URL}${CONTENT_URL}/_disciplina.yaml`;
+    
+    try {
+      const response = await fetch(disciplinaYamlPath);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok when loading _disciplina.yaml.');
+      }
+
+      const text = await response.text();
+      if (!text) {
+        throw new Error('There was a problem when converting to text the fetched disciplina.yaml. The YAML file is empty or with broken characters (or something else).');
+      }
+
+      data = yaml.load(text);
+      flagLoadingYaml = false;
+    } catch (error) {
+      console.error('We could not load the disciplina YAML file: Error message is:', error);
+    }
+
+    return {
+      props: {
+        courseMetadata: data,
+        loadingYaml: flagLoadingYaml,
+      },
+    };
+  }
 
 export default Home;
