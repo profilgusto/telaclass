@@ -1,16 +1,16 @@
-version: '3'
 services:
-  telaclass_react-app:
+  telaclass_react-app-prod:
     build:
       context: .
       dockerfile: Dockerfile.prod.app
     image: telaclass-i
-    container_name: telaclass_react-app-c
+    container_name: telaclass_react-app-c-prod
     volumes:
-      - ../react-app:/app
+      - ./react-app:/app
     ports:
       - "3000:3000"
-    command: ["npm", "start"]
+    user: "1000:1000"
+    command: ["/bin/bash", "-c", "npm install && npm run build && npm start"]
 
   nginx:
     build:
@@ -19,4 +19,4 @@ services:
     ports:
       - "19000:19000"
     depends_on:
-      - telaclass_react-app
+      - telaclass_react-app-prod

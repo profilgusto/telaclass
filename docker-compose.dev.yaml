@@ -1,10 +1,10 @@
 services: 
-  telaclass_react-app:
+  telaclass_react-app-dev:
     build:
       context: . 
       dockerfile: Dockerfile.dev
     image: telaclass-i
-    container_name: telaclass_react-app-c
+    container_name: telaclass_react-app-c-dev
     volumes:
       - ../react-app:/app
       - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/public/content-telaclass
