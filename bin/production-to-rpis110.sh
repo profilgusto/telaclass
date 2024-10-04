@@ -8,7 +8,7 @@ REMOTE_SSH_PORT=2269
 # paths
 TELACLASS_LOCAL=/Users/filgusto/git-sources/telaclass/
 TELACLASS_REMOTE=/home/filgusto/app-telaclass/
-TELACLASS_EXCLUDES="--exclude react-app/node_modules --exclude react-app/package-lock.json --exclude react-app/build --exclude react-app/.next --exclude .git --exclude .gitignore --exclude .gitattributes"
+TELACLASS_EXCLUDES="--exclude react-app/node_modules --exclude react-app/package-lock.json --exclude react-app/build --exclude react-app/.next --exclude .git --exclude .gitignore --exclude .gitattributes --exclude .DS_Store"
 
 CONTENT_LOCAL=/Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass/
 CONTENT_REMOTE=/home/filgusto/app-telaclass/react-app/public/content-telaclass/
