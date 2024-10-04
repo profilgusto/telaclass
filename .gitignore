@@ -39,3 +39,5 @@ react-app/.node_repl_history
 
 # Windows files
 Thumbs.db
+
+*/package-lock.json
