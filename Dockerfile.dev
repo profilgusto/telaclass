@@ -1,4 +1,4 @@
-# Usar a imagem base do Ubuntu 20.04
+# Usar a imagem base do node
 FROM node:latest
 
 # Set the DEBIAN_FRONTEND environment variable to noninteractive

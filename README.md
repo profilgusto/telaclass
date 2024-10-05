@@ -11,3 +11,9 @@ In your browser, you should find the application in
 ```
 http://localhost:3000/
 ```
+
+
+## Example content
+
+https://github.com/profilgusto/telaclass-content-template
+
