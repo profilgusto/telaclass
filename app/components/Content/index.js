@@ -42,6 +42,10 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl }) => {
     );
   }
 
+  // TODO Adicionar agora a div dos slides de maneira condicional, caso haja
+
+  // TODO Renderizar também o conteúdo de forma condicional, caso haja o arquivo texto.mdx
+
   return (
     <div className={styles.mainDiv}>
 
@@ -63,18 +67,10 @@ export default Content
 const fixMdx = (data, contentBaseUrl) => {
   // Fixes things in the MDX raw file
 
-  console.log('CP1');
-  console.log(contentBaseUrl);
-
   // TODO Pensar numa melhor maneira de modificar o path das imagens pô
 
   // Fixing the images path to URI, replacing relative local path `./` to the public folder `/` path in React app
   data = data.replace(/\!\[img\]\(/g, `![img](`+ contentBaseUrl+`/img/`);
-
-
-
-
-  // http://localhost:3000/content-telaclass/introducao/img/img1.png
 
   return data;
 }
