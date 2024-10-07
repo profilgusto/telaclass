@@ -24,6 +24,10 @@ function Home({courseMetadata, loadingYaml}) {
     );
   }
 
+  // TODO - ADd a 404 page
+
+  // TODO Criar a paleta de cores e atualizar todos os css abaixo como variáveis
+
   return (
     <div >
       <Header
