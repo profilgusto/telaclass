@@ -1,0 +1,9 @@
+services:
+  telaclass_react-app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        CONTENT_TELACLASS_PATH: /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass
+    image: telaclass-i
+    container_name: telaclass_react-app-c-prod

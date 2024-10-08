@@ -1,0 +1,18 @@
+professor: 
+    nome: "Filipe Augusto Santos Rocha"
+    email: "filipe@ufsj.edu.br"
+
+disciplina:
+  nome: "Sistemas Supervisórios"
+  codigo: "ENM704"
+  semestre: "2"
+  ano: "2024"
+  
+  modulos:
+    - titulo: "Apresentação da disciplina"
+      path: "/introducao"
+
+
+
+
+   
