@@ -9,8 +9,8 @@ import { compile, run } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime'
 
 // plugins
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github-dark.css';
+// import hljs from 'highlight.js';
+// import 'highlight.js/styles/github-dark.css';
 import remarkGfm from 'remark-gfm' // Tables, footnotes, strikethrough, task lists, literal URLs.
 import remarkMath from 'remark-math' // Support math like `$so$`.
 import rehypeKatex from 'rehype-katex' // Render math with KaTeX.
@@ -36,14 +36,17 @@ const MDXRenderer = ({ mdxContent }) => {
 
   
   useEffect(() => {
-    if (content && mdxContentRef.current) {
+    
+    // TODO REtirei esta parte por motivo de acho que o hljs é que está dando problemas com o Next.js
+    const a = 10;
+    /*if (content && mdxContentRef.current) {
       // Faz um pós tratamento customizado no produto da compilação
 
         // Applies highlight to the code blocks
         mdxContentRef.current.querySelectorAll('code').forEach((block) => {
-        hljs.highlightBlock(block);
+        hljs.highlightElement(block);
       }); 
-    }
+    } */
   }, [content]);
   
   return (
