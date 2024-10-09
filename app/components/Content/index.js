@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import MDXRenderer from '../MdxRenderer';
+import SlidesRenderer from '../SlidesRenderer';
 
 // Import styles
 import styles from './style.module.css';
@@ -80,10 +81,16 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl }) => {
         <h1>{modulos[selectedLesson].titulo}</h1>
       </div>
 
+      {/*
       {mdxContentSlides && (
         <div className={styles.classSlides}>
           <MDXRenderer mdxContent={mdxContentSlides} />
         </div>
+      )}
+      */}
+
+      {mdxContentSlides && (
+        <SlidesRenderer mdxContentSlides={mdxContentSlides} />
       )}
 
       {mdxContentText && (
