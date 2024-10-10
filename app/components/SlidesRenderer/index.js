@@ -83,12 +83,8 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         }, 50);
     }, [isPresentationMode]);
 
-
-    // conditional styling depending o presentation mode or not
-    const fullscreenSlideStyle = isPresentationMode ? 'fullScreen' : '';
-
     return (
-        <div className={`${styles.slidesContainer} ${styles[fullscreenSlideStyle]}`}>
+        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`}>
                 <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
                 <ReactFlow 
                     nodes={nodes} 
