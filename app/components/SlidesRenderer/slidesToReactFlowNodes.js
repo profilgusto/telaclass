@@ -5,13 +5,10 @@ const slidesToReactFlowNodes = (slidesContent) => {
     const nodes = [];
     const edges = [];
 
-
-
     let flag_first_slide = true;
 
     let pos_x_current;
     let pos_y_current;
-
 
     slidesContent.forEach( (slideContent, index) => {
 

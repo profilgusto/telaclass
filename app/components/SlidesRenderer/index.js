@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ReactFlow, ReactFlowProvider } from '@xyflow/react';
+import React, { useCallback } from 'react';
+import { ReactFlow, ReactFlowProvider, useReactFlow } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -20,7 +20,8 @@ const NODE_TYPES = {
 const INITIAL_SLIDE = '0';
 
 
-const SlidesRenderer = ({ mdxContentSlides }) => {
+
+const SlidesRendererInner = ({ mdxContentSlides }) => {
 
     // splits the mdx content into splits for each section/slide
     const mdxSplits = splitMdxContent(mdxContentSlides);
@@ -28,28 +29,38 @@ const SlidesRenderer = ({ mdxContentSlides }) => {
     // converts the mdx splits into nodes and edges for the react flow
     const { nodes, edges } = slidesToReactFlowNodes(mdxSplits);
 
+
+    // handles the click on a node
+    const { fitView } = useReactFlow();
+    const handleNodeClick = useCallback(
+        (_, node) => {
+          fitView({ nodes: [node], duration: 500 });
+        },
+        [fitView],
+      );
+
+
     return (
         <div className={styles.slidesContainer}>
-
-            <ReactFlowProvider>
                 <ReactFlow 
                     nodes={nodes} 
                     nodeTypes={NODE_TYPES} 
                     fitView
                     fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
                     minZoom={0.1}
+                    onNodeClick={handleNodeClick}
                 />
-            </ReactFlowProvider>
-
-
-                {/*
-                fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
-                minZoom={0.1}
-                onNodeClick={handleNodeClick}
-                onKeyDown={handleKeyPress}
-                */}
-
         </div>
+    );
+};
+
+
+// I was obliged to create an outer component because of the ReactFlowProvider, that must be outside the ReactFlow component
+const SlidesRenderer = ({ mdxContentSlides }) => {
+    return (
+        <ReactFlowProvider>
+            <SlidesRendererInner mdxContentSlides={mdxContentSlides} />
+        </ReactFlowProvider>
     );
 };
 
