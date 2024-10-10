@@ -12,6 +12,10 @@
     border-radius: 40px;
 }
 
+.footer {
+    background-color: blueviolet;
+}
+
 
 .slide__controls {
     position: absolute;

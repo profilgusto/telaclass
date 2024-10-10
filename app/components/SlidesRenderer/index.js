@@ -20,7 +20,6 @@ const NODE_TYPES = {
 const INITIAL_SLIDE = '0';
 
 
-
 const SlidesRendererInner = ({ mdxContentSlides }) => {
 
     // splits the mdx content into splits for each section/slide
@@ -28,7 +27,6 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
 
     // converts the mdx splits into nodes and edges for the react flow
     const { nodes, edges } = slidesToReactFlowNodes(mdxSplits);
-
 
     // handles the click on a node
     const { fitView } = useReactFlow();
@@ -38,7 +36,6 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
         },
         [fitView],
       );
-
 
     return (
         <div className={styles.slidesContainer}>

@@ -9,10 +9,13 @@ const slidesToReactFlowNodes = (slidesContent) => {
 
     let pos_x_current;
     let pos_y_current;
+    let slide_previous_id;
+    let slide_next_id;
+    
 
     slidesContent.forEach( (slideContent, index) => {
 
-        // layouting slides
+        // layouting slides position
         if (flag_first_slide) {
             pos_x_current = 0;
             pos_y_current = 0;
@@ -30,9 +33,22 @@ const slidesToReactFlowNodes = (slidesContent) => {
             }
         }
 
+        // treating neighbors slides index
+        if (index == 0) {
+            slide_previous_id = null;
+            slide_next_id = (index + 1).toString();
+        } else if (index == slidesContent.length - 1) {
+            slide_previous_id = (index - 1).toString();
+            slide_next_id = null;
+        } else {
+            slide_previous_id = (index - 1).toString();
+            slide_next_id = (index + 1).toString();
+        }
+
+
         nodes.push({
             id: index.toString(),
-            data: {content: slideContent},
+            data: {content: slideContent, slide_next_id: slide_next_id, slide_previous_id: slide_previous_id},
             type: 'slide',
             position: { x: pos_x_current, y: pos_y_current }
         });

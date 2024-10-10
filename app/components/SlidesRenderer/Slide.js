@@ -17,7 +17,9 @@ const style = {
 
 export function Slide( { data } ) {
 
-  /*
+  console.log('cp0');
+  console.log(data);
+
   const { fitView } = useReactFlow();
   const fitViewToAnotherSlide = useCallback(
     (event, id) => {
@@ -25,22 +27,19 @@ export function Slide( { data } ) {
       fitView({ nodes: [{id}], duration: 500 });
     },
     [fitView],
-  ); */
+  );
 
   return (
     <article className={styles.slide} style={style}>
 
       <MDXRenderer mdxContent={data.content} />
 
-      {/*
-      <footer className="slide__controls nopan">
-        {data.left && (<button onClick={(e) => fitViewToAnotherSlide(e, data.left)}>←</button>)}
-        {data.up && (<button onClick={(e) => fitViewToAnotherSlide(e, data.up)}>↑</button>)}
-        {data.down && (<button onClick={(e) => fitViewToAnotherSlide(e, data.down)}>↓</button>)}
-        {data.right && (<button onClick={(e) => fitViewToAnotherSlide(e, data.right)}>→</button>)}
+      
+      <footer class name={styles.slide__controls}> 
+        {data.slide_previous_id && (<button onClick={(e)=>fitViewToAnotherSlide(e, data.slide_previous_id)}>←</button>)}
+        {data.slide_next_id && (<button onClick={(e)=>fitViewToAnotherSlide(e, data.slide_next_id)}>→</button>)}
       </footer>
 
-      */}
 
     </article>
   );
