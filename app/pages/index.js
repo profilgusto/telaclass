@@ -29,9 +29,6 @@ function Home({courseMetadata, loadingYaml}) {
 
   // TODO Criar a paleta de cores e atualizar todos os css abaixo como variáveis
 
-  console.log('cp0');
-  console.log(isPresentationMode);
-
   return (
     <div >
       <Header
