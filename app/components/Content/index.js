@@ -93,10 +93,12 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
       )}
 
       {mdxContentText && (
-        <div className={styles.classContent}>
+        <div className={`${styles.classContent} ${isPresentationMode ? styles.hidden : ''} `}>
           <MDXRenderer mdxContent={mdxContentText} />
         </div>    
       )}
+
+
 
       { !mdxContentSlides && !mdxContentText && (
         <div className={styles.classContent}>
