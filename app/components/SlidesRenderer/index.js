@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ReactFlow, ReactFlowProvider, useReactFlow } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
@@ -21,6 +21,7 @@ const INITIAL_SLIDE = '0';
 
 
 const SlidesRendererInner = ({ mdxContentSlides }) => {
+    const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
 
     // splits the mdx content into splits for each section/slide
     const mdxSplits = splitMdxContent(mdxContentSlides);
@@ -32,10 +33,36 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
     const { fitView } = useReactFlow();
     const handleNodeClick = useCallback(
         (_, node) => {
-          fitView({ nodes: [node], duration: 500 });
+            fitView({ nodes: [node], duration: 500 });
+            setCurrentSlide_id(node.id);
         },
         [fitView],
+    );
+
+    const handleKeyPress = useCallback(
+        (event) => {
+          const currentSlide_node = nodes[currentSlide_id];
+     
+          switch (event.key) {
+            case 'ArrowLeft':
+            case 'ArrowRight':
+
+                const direction = event.key.slice(5).toLowerCase();
+
+                if (direction == 'left' && currentSlide_node.data.slide_previous_id) {
+                    event.preventDefault();
+                    setCurrentSlide_id(currentSlide_node.data.slide_previous_id);
+                    fitView({ nodes: [{ id: currentSlide_node.data.slide_previous_id }], duration: 500  });
+                } else if (direction == 'right' && currentSlide_node.data.slide_next_id) {
+                    event.preventDefault();
+                    setCurrentSlide_id(currentSlide_node.data.slide_next_id);
+                    fitView({ nodes: [{ id: currentSlide_node.data.slide_next_id }], duration: 500  });
+                }
+          }
+        },
+        [currentSlide_id, fitView],
       );
+
 
     return (
         <div className={styles.slidesContainer}>
@@ -46,6 +73,7 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
                     fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
                     minZoom={0.1}
                     onNodeClick={handleNodeClick}
+                    onKeyDown={handleKeyPress}
                 />
         </div>
     );

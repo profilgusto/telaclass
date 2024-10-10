@@ -14,11 +14,7 @@ const style = {
 };
 
 
-
 export function Slide( { data } ) {
-
-  console.log('cp0');
-  console.log(data);
 
   const { fitView } = useReactFlow();
   const fitViewToAnotherSlide = useCallback(
@@ -35,7 +31,7 @@ export function Slide( { data } ) {
       <MDXRenderer mdxContent={data.content} />
 
       
-      <footer class name={styles.slide__controls}> 
+      <footer className={styles.slide__controls}> 
         {data.slide_previous_id && (<button onClick={(e)=>fitViewToAnotherSlide(e, data.slide_previous_id)}>←</button>)}
         {data.slide_next_id && (<button onClick={(e)=>fitViewToAnotherSlide(e, data.slide_next_id)}>→</button>)}
       </footer>
