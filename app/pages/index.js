@@ -13,6 +13,7 @@ const CONTENT_URL = '/content-telaclass';
 // MAIN FUNCTION
 function Home({courseMetadata, loadingYaml}) {
   const [selectedLesson, setSelectedLesson] = useState(0);
+  const [isPresentationMode, setIsPresentationMode] = useState(false);
 
   // Loading screen
   if (loadingYaml) {
@@ -28,6 +29,9 @@ function Home({courseMetadata, loadingYaml}) {
 
   // TODO Criar a paleta de cores e atualizar todos os css abaixo como variáveis
 
+  console.log('cp0');
+  console.log(isPresentationMode);
+
   return (
     <div >
       <Header
@@ -37,12 +41,14 @@ function Home({courseMetadata, loadingYaml}) {
         disciplinaSemestre={courseMetadata?.disciplina.semestre}
         professorNome={courseMetadata?.professor.nome}
         professorEmail={courseMetadata?.professor.email}
+        isPresentationMode={isPresentationMode}
       />
 
       <Sidebar
         modulos={courseMetadata?.disciplina.modulos} 
         onSelectLesson={setSelectedLesson} 
         selectedLesson={selectedLesson}
+        isPresentationMode={isPresentationMode}
       />  
 
       
@@ -50,6 +56,8 @@ function Home({courseMetadata, loadingYaml}) {
         modulos={courseMetadata?.disciplina.modulos} 
         selectedLesson={selectedLesson} 
         content_url={CONTENT_URL} 
+        isPresentationMode={isPresentationMode}
+        onPresentationMode={setIsPresentationMode}
       />
       
 

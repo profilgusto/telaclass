@@ -5,11 +5,14 @@ const Header = ( {disciplinaNome,
                   disciplinaSemestre,
                   disciplinaAno,
                   professorNome,
-                  professorEmail
+                  professorEmail,
+                  isPresentationMode,
                 } ) => {
-    return (
-      <header className={styles.header}>
 
+    
+
+    return (
+      <header className={`${styles.header} ${isPresentationMode ? styles.hidden : ''} `}>
 
         <div className={styles.boxLeft}>
           <img src="/assets/logo-ufsj.svg" alt="logo ufsj" className={styles.logoUfsj} />

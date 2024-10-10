@@ -20,8 +20,10 @@ const NODE_TYPES = {
 const INITIAL_SLIDE = '0';
 
 
-const SlidesRendererInner = ({ mdxContentSlides }) => {
+const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
+    
     const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
+    
 
     // splits the mdx content into splits for each section/slide
     const mdxSplits = splitMdxContent(mdxContentSlides);
@@ -64,8 +66,23 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
       );
 
 
+    // button for changing for presentation mode
+    const handleButPresentationMode = useCallback(
+        () => {
+            onPresentationMode(!isPresentationMode);
+            // TODO The below fitView is not working properly. It is not fitting the view to the current slide.
+            //fitView({ nodes: [{ id: currentSlide_id }], duration: 500  });
+        },
+        [isPresentationMode],
+    );
+
+
+    // conditional styling depending o presentation mode or not
+    const fullscreenSlideStyle = isPresentationMode ? 'fullScreen' : '';
+
     return (
-        <div className={styles.slidesContainer}>
+        <div className={`${styles.slidesContainer} ${styles[fullscreenSlideStyle]}`}>
+                <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
                 <ReactFlow 
                     nodes={nodes} 
                     nodeTypes={NODE_TYPES} 
@@ -81,10 +98,14 @@ const SlidesRendererInner = ({ mdxContentSlides }) => {
 
 
 // I was obliged to create an outer component because of the ReactFlowProvider, that must be outside the ReactFlow component
-const SlidesRenderer = ({ mdxContentSlides }) => {
+const SlidesRenderer = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
     return (
         <ReactFlowProvider>
-            <SlidesRendererInner mdxContentSlides={mdxContentSlides} />
+            <SlidesRendererInner 
+                mdxContentSlides={mdxContentSlides} 
+                isPresentationMode={isPresentationMode} 
+                onPresentationMode={onPresentationMode}
+            />
         </ReactFlowProvider>
     );
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import MDXRenderer from '../MdxRenderer';
 import SlidesRenderer from '../SlidesRenderer';
 
@@ -11,7 +10,7 @@ const FETCH_SUCCESS = 200;
 const FETCH_NOT_FOUND = 404;
 
 
-const Content = ({ modulos, selectedLesson, content_url: contentUrl }) => {
+const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentationMode, onPresentationMode }) => {
 
   // Defining states
   const [mdxContentText, setMdxContentText] = useState(null);
@@ -70,10 +69,6 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl }) => {
     );
   }
 
-  // TODO Adicionar agora a div dos slides de maneira condicional, caso haja
-
-  // TODO Renderizar também o conteúdo de forma condicional, caso haja o arquivo texto.mdx
-
   return (
     <div className={styles.mainDiv}>
 
@@ -90,7 +85,11 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl }) => {
       */}
 
       {mdxContentSlides && (
-        <SlidesRenderer mdxContentSlides={mdxContentSlides} />
+        <SlidesRenderer 
+          mdxContentSlides={mdxContentSlides} 
+          isPresentationMode={isPresentationMode}
+          onPresentationMode={onPresentationMode}
+        />
       )}
 
       {mdxContentText && (

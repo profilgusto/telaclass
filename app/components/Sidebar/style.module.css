@@ -20,6 +20,10 @@
   box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.8);
 }
 
+.hidden {
+  display: none;
+}
+
 .sidebar h1 {
   font-size: 24px;
   margin-left: 20px;

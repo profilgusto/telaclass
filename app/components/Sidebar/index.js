@@ -1,8 +1,9 @@
 import styles from './style.module.css';
 
-const Sidebar = ( {modulos, onSelectLesson, selectedLesson} ) => {
+const Sidebar = ( {modulos, onSelectLesson, selectedLesson, isPresentationMode} ) => {
     return (
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${isPresentationMode ? styles.hidden : ''} `}>
+
         <h1>Conteúdo</h1>      
         <ul>
           {modulos.map((aula, index) => (
