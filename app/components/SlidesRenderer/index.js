@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ReactFlow, ReactFlowProvider, useReactFlow } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
@@ -76,12 +76,15 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         [isPresentationMode],
     );
 
-
-    // conditional styling depending o presentation mode or not
-    const fullscreenSlideStyle = isPresentationMode ? 'fullScreen' : '';
+    // for fitViewing the current slide after changing the SlidesRendererInner size
+    useEffect(() => {
+        setTimeout(() => {
+            fitView({ nodes: [{ id: currentSlide_id }], duration: 500  });
+        }, 50);
+    }, [isPresentationMode]);
 
     return (
-        <div className={`${styles.slidesContainer} ${styles[fullscreenSlideStyle]}`}>
+        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`}>
                 <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
                 <ReactFlow 
                     nodes={nodes} 

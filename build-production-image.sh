@@ -8,5 +8,5 @@ rsync -avz -h $TELACLASS_CONTENT_PATH/ ./app/public/content-telaclass/
 # building the image
 docker build -t telaclass-i -f Dockerfile.prod .
 
-# running the image
+# for testing the image locally
 #docker run -d -p 3000:3000 --name telaclass-container telaclass-i
