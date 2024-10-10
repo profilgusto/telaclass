@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReactFlow } from '@xyflow/react';
+import { ReactFlow, ReactFlowProvider } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -31,20 +31,23 @@ const SlidesRenderer = ({ mdxContentSlides }) => {
     return (
         <div className={styles.slidesContainer}>
 
-            
-            <ReactFlow 
-                nodes={nodes} 
-                nodeTypes={NODE_TYPES} 
-                fitView
+            <ReactFlowProvider>
+                <ReactFlow 
+                    nodes={nodes} 
+                    nodeTypes={NODE_TYPES} 
+                    fitView
+                    fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
+                    minZoom={0.1}
+                />
+            </ReactFlowProvider>
+
+
+                {/*
                 fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
                 minZoom={0.1}
-            />
-
-                            {/*
                 onNodeClick={handleNodeClick}
                 onKeyDown={handleKeyPress}
                 */}
-
 
         </div>
     );

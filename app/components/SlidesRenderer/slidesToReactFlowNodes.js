@@ -9,10 +9,10 @@ const slidesToReactFlowNodes = (slidesContent) => {
     let pos_y_current = 0;
 
 
-    slidesContent.forEach( (slide, index) => {
+    slidesContent.forEach( (slideContent, index) => {
         nodes.push({
-            id: index,
-            slideContentData: slide,
+            id: index.toString(),
+            data: {content: slideContent},
             type: 'slide',
             position: { x: pos_x_current, y: pos_y_current }
         });
@@ -23,13 +23,9 @@ const slidesToReactFlowNodes = (slidesContent) => {
             target: index + 1
         });
 
-        pos_x_current += SLIDE_WIDTH * 1.1;
+        pos_x_current += SLIDE_WIDTH * 1.05;
 
     });
-
-    console.log('cp0');
-    console.log(nodes);
-    console.log(edges);
 
     return { nodes, edges };
 }

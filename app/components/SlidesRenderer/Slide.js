@@ -2,6 +2,8 @@ import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
 
 import MDXRenderer from '../MdxRenderer';
+
+import styles from "./Slide.style.module.css";
  
 export const SLIDE_WIDTH = 1920;
 export const SLIDE_HEIGHT = 1080;
@@ -12,7 +14,8 @@ const style = {
 };
 
 
-export function Slide( { slideContentData } ) {
+
+export function Slide( { data } ) {
 
   /*
   const { fitView } = useReactFlow();
@@ -25,11 +28,10 @@ export function Slide( { slideContentData } ) {
   ); */
 
   return (
-    <article className="slide nodrag" style={style}>
+    <article className={styles.slide} style={style}>
 
-      <MDXRenderer mdxContent={slideContentData} />
+      <MDXRenderer mdxContent={data.content} />
 
-      
       {/*
       <footer className="slide__controls nopan">
         {data.left && (<button onClick={(e) => fitViewToAnotherSlide(e, data.left)}>←</button>)}
