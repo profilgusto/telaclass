@@ -1,11 +1,12 @@
 
 .slidesContainer {
-    background-color: rgba(0, 255, 255, 0.295);
+    background-color: #232424;
     width: 100%;
-    height: 400px;
+    aspect-ratio: 16 / 9;
 
     display: block;
     margin: 0 auto;
     border-radius: 15px;
+    box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.8);
 }
 
