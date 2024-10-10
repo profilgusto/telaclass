@@ -13,15 +13,24 @@ const CONTENT_URL = '/content-telaclass';
 // MAIN FUNCTION
 function Home({courseMetadata, loadingYaml}) {
   const [selectedLesson, setSelectedLesson] = useState(0);
+  const [isPresentationMode, setIsPresentationMode] = useState(false);
 
   // Loading screen
   if (loadingYaml) {
     return (
       <div className="App">
-        <h1>Loading...</h1>
+        <h1>Carregando a sua disciplina, aguarde...</h1>
+        <p>Verifique se o arquivo disciplina.yaml está localizado na pasta do conteúdo.</p>
       </div>
     );
   }
+
+  // TODO - ADd a 404 page
+
+  // TODO Criar a paleta de cores e atualizar todos os css abaixo como variáveis
+
+  console.log('cp0');
+  console.log(isPresentationMode);
 
   return (
     <div >
@@ -32,20 +41,29 @@ function Home({courseMetadata, loadingYaml}) {
         disciplinaSemestre={courseMetadata?.disciplina.semestre}
         professorNome={courseMetadata?.professor.nome}
         professorEmail={courseMetadata?.professor.email}
+        isPresentationMode={isPresentationMode}
       />
 
       <Sidebar
-        planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
+        modulos={courseMetadata?.disciplina.modulos} 
         onSelectLesson={setSelectedLesson} 
         selectedLesson={selectedLesson}
-      />    
+        isPresentationMode={isPresentationMode}
+      />  
 
+      
       <Content
-        planoDeAulas={courseMetadata?.disciplina.planoDeAulas} 
+        modulos={courseMetadata?.disciplina.modulos} 
         selectedLesson={selectedLesson} 
         content_url={CONTENT_URL} 
+        isPresentationMode={isPresentationMode}
+        onPresentationMode={setIsPresentationMode}
       />
+      
+
     </div>
+
+    
   );
 }
 
@@ -56,7 +74,7 @@ function Home({courseMetadata, loadingYaml}) {
 
     try {
       // load yaml file
-      const disciplinaYamlPath = path.join(process.cwd(), 'public', CONTENT_URL, '_disciplina.yaml');
+      const disciplinaYamlPath = path.join(process.cwd(), 'public', CONTENT_URL, 'disciplina.yaml');
       const fileContents = fs.readFileSync(disciplinaYamlPath, 'utf8');
 
       // parse its content

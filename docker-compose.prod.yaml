@@ -1,0 +1,10 @@
+services:
+  telaclass_react-app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: telaclass-i-prod
+    container_name: telaclass_react-app-c-prod
+    ports: 
+      - "3000:3000"
+    command: ["/bin/sh", "-c", "tail -f /dev/null"]

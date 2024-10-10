@@ -3,15 +3,15 @@ services:
     build:
       context: . 
       dockerfile: Dockerfile.dev
-    image: telaclass-i
+    image: telaclass-i-dev
     container_name: telaclass_react-app-c-dev
     volumes:
-      - ../react-app:/app
+      - ./app:/app
       - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/public/content-telaclass
      #- /Users/filgusto/Desktop/content-telaclass_template:/app/public/content-telaclass
     ports: 
       - "3000:3000"
-    command: ["/bin/bash", "-c", "npm install && npm run dev"]
+    command: ["/bin/sh", "-c", "npm install && npm run dev"]
     #command: ["/bin/bash", "-c", "tail -f /dev/null"]
 
 

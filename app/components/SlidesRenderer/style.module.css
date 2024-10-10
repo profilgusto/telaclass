@@ -1,0 +1,31 @@
+.slidesContainer {
+    background-color: #232424;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.8);
+}
+
+.fullScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3000;
+  }
+
+.but_presentationMode {
+    position: relative; 
+    top: 0px; 
+    left: 0px; 
+    padding: 5px ;
+    z-index: 1000; 
+    opacity: 0.3;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px 0  rgba(0, 0, 0, 0.8);
+}
+

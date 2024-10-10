@@ -17,6 +17,11 @@
   justify-content: space-between;
 }
 
+.hidden {
+  display: none;
+}
+
+
 .boxLeft {
   margin-left: 5%;
   flex: 1;
