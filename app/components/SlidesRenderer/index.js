@@ -102,6 +102,7 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
 
 // I was obliged to create an outer component because of the ReactFlowProvider, that must be outside the ReactFlow component
 const SlidesRenderer = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
+    
     return (
         <ReactFlowProvider>
             <SlidesRendererInner 
