@@ -18,6 +18,8 @@ export function Slide( { data } ) {
 
   // ftting view to another slide based on the given id
   const { fitView } = useReactFlow();
+  
+
   const fitViewToAnotherSlide = useCallback(
     (event, id) => {
       event.stopPropagation();
@@ -28,6 +30,7 @@ export function Slide( { data } ) {
 
   // determine the classname based on the slide type
   const slideClassStyle = data.content.startsWith('##') ? 'slide_regular' : data.content.startsWith('#') ? 'slide_title' : '';
+
 
   return (
     <article className={`${styles.slide} ${styles[slideClassStyle]}` } style={style}>
