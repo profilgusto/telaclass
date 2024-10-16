@@ -46,11 +46,10 @@
 
 
 .slide_regular  .slide__content {
-    width: 1850px;
-    height: 1030px;
     display: flex;
     flex-direction: column;
-    overflow: visible;
+    overflow: hidden;
+    height: 1030px;
 
     background-color: rgba(0, 255, 255, 0.144);
 }

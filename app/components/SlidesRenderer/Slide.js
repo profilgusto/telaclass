@@ -52,9 +52,6 @@ export function Slide( { data } ) {
           // removes the first element of childrenofFirstChild array as it is always a "link" element which is rendered by the MDX Renderer
           contentChildren.shift();
 
-          console.log('cp1');
-          console.log(contentChildren);
-
           // retrieves the last element of the slide
           const lastElement = contentChildren[contentChildren.length - 1];
           
@@ -64,6 +61,10 @@ export function Slide( { data } ) {
 
             // retrieves the height of refDifContent
             const RefDifContent_height = refDifContent.current.offsetHeight;
+
+            console.log('cp1');
+            console.log(RefDifContent_height);
+
 
             // computes an array that each index is the height of each element summed to the margin to the next element     
             const heightArray = Array.from(contentChildren).map((element, index, array) => {
@@ -77,17 +78,11 @@ export function Slide( { data } ) {
               return element.offsetHeight + effectiveMargin;
             });
             
-            
+            // computes the height of the last element to fit the slide height
             const heightPartialSum = heightArray.slice(0, heightArray.length - 1).reduce((acc, height) => acc + height, 0);
             const lastElementHeight = RefDifContent_height - heightPartialSum;
 
-            console.log('Found an image as last element of the slide!');
-            console.log(lastElement.firstChild);
-            console.log(lastElementHeight);
-
-
             // applies the style
-            //lastElement.style.height = `${lastElementHeight}px`;
             lastElement.firstChild.style.height = `${lastElementHeight}px`;
           }
 
