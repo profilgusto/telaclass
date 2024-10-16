@@ -15,7 +15,7 @@ const style = {
 
 
 export function Slide( { data } ) {
-  const refDifContent = useRef(null);
+  const refDivContent = useRef(null);
 
   const [contentHeights, setContentHeights] = useState([]);
   const [slideRendered, setSlideRendereed] = useState(false);
@@ -42,9 +42,9 @@ export function Slide( { data } ) {
     // only applies this height tweak to regular slides
     if (slideClassStyle === 'slide_regular') {
       // test if there is any content inside the reference
-      if (refDifContent.current) {
+      if (refDivContent.current) {
         // the whole content is always inserted within a div (MDXREnderer thing)
-        const firstChild = refDifContent.current.firstChild;
+        const firstChild = refDivContent.current.firstChild;
         if (firstChild) {
           // lists all the content elements in an array
           const contentChildren = Array.from(firstChild.children);
@@ -52,19 +52,34 @@ export function Slide( { data } ) {
           // removes the first element of childrenofFirstChild array as it is always a "link" element which is rendered by the MDX Renderer
           contentChildren.shift();
 
+          console.log('cp1');
+          console.log(contentChildren);
+
           // retrieves the last element of the slide
           const lastElement = contentChildren[contentChildren.length - 1];
           
-          // treats if the last element is an image
+
+          // --> treats if the last element is an image
           // remarks that it retrieves the child of a p because the MDXRenderer always wraps the images with a <p> tag (IIII doooont know whyyyy)
           if (lastElement && lastElement.tagName === 'P' && lastElement.firstChild.tagName === 'IMG') {
+            const lastElementNewHeight = computeLastElementSize(refDivContent, contentChildren, lastElement);
+            lastElement.firstChild.style.height = `${lastElementNewHeight}px`;
+          }
 
+          // --> treats if the last element is an iframe (youtube videos?, not necessarily)
+          if ( lastElement && lastElement.tagName === 'IFRAME') {
+            const lastElementNewHeight = computeLastElementSize(refDivContent, contentChildren, lastElement);
+            lastElement.style.height = `${lastElementNewHeight}px`;
+          }
+
+            //console.log('Achei um iframe!!');
+
+            /*
             // retrieves the height of refDifContent
             const RefDifContent_height = refDifContent.current.offsetHeight;
 
-            console.log('cp1');
+            console.log('cp2');
             console.log(RefDifContent_height);
-
 
             // computes an array that each index is the height of each element summed to the margin to the next element     
             const heightArray = Array.from(contentChildren).map((element, index, array) => {
@@ -84,16 +99,9 @@ export function Slide( { data } ) {
 
             // applies the style
             lastElement.firstChild.style.height = `${lastElementHeight}px`;
-          }
-
-          // treats also iframes (youtube videos?)
-            
-          // test if contentChildren[contentChildren.length - 1] has the property `style``
-          /*if (contentChildren.length > 0 && contentChildren[contentChildren.length - 1].style) {
-            // define the offsetHeight of the last element of childrenOfFirstChild to be lastElementHeight
-            contentChildren[contentChildren.length - 1].style.height = `${lastElementHeight}px`;
-          } */
-
+            */
+          //}
+        
         }
       }
     }
@@ -108,7 +116,7 @@ export function Slide( { data } ) {
   return (
     <article className={`${styles.slide} ${styles[slideClassStyle]}` } style={style}>
 
-      <div className={styles.slide__content} ref={refDifContent}>
+      <div className={styles.slide__content} ref={refDivContent}>
         <MDXRenderer mdxContent={data.content} />
       </div>
 
@@ -122,6 +130,29 @@ export function Slide( { data } ) {
   );
 }
 
+
+// generate computeLastElementSize
+const computeLastElementSize = (refDivContent, contentChildren, lastElement) => {
+  // retrieves the height of refDifContent
+  const RefDifContent_height = refDivContent.current.offsetHeight;
+
+  // computes an array that each index is the height of each element summed to the margin to the next element     
+  const heightArray = Array.from(contentChildren).map((element, index, array) => {
+    if (index === array.length - 1) {
+      return element.offsetHeight;
+    }
+  
+    const nextElement = array[index + 1];
+    const effectiveMargin = getEffectiveMargin(element, nextElement);
+  
+    return element.offsetHeight + effectiveMargin;
+  });
+  
+  // computes the height of the last element to fit the slide height
+  const heightPartialSum = heightArray.slice(0, heightArray.length - 1).reduce((acc, height) => acc + height, 0);
+  
+  return RefDifContent_height - heightPartialSum;
+};
 
 // computes the effective margin between any two rendered HTML elements
 const getEffectiveMargin = (element1, element2) => {
