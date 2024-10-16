@@ -75,8 +75,8 @@ const slidesToReactFlowNodes = (slidesContent) => {
     // treating the section navigation ids
     nodes.forEach((node, index) => {
         const surroundingIndexes = findSurroundingIndexes(node.id, headersIndexes);
-        node.data.section_previous_id = surroundingIndexes.belowIndex ? surroundingIndexes.belowIndex.toString() : null;
-        node.data.section_next_id = surroundingIndexes.aboveIndex ? surroundingIndexes.aboveIndex.toString() : null;
+        node.data.section_previous_id = surroundingIndexes.belowIndex!=null ? surroundingIndexes.belowIndex.toString() : null;
+        node.data.section_next_id = surroundingIndexes.aboveIndex!=null ? surroundingIndexes.aboveIndex.toString() : null;        
     });
 
     return { nodes, edges };
