@@ -19,10 +19,11 @@ const NODE_TYPES = {
 
 const INITIAL_SLIDE = '0';
 
-
 const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
     
     const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
+    const [isDraggingNode, setIsDraggingNode] = useState(false);
+    const [initialMousePosition, setInitialMousePosition] = useState(null);
     
 
     // splits the mdx content into splits for each section/slide
@@ -31,14 +32,17 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
     // converts the mdx splits into nodes and edges for the react flow
     const { nodes, edges } = slidesToReactFlowNodes(mdxSplits);
 
-    // handles the click on a node
     const { fitView } = useReactFlow();
+
+    // handles the click on a node
     const handleNodeClick = useCallback(
         (_, node) => {
-            fitView({ nodes: [node], duration: 500 });
-            setCurrentSlide_id(node.id);
+            if (!isDraggingNode) {
+                fitView({ nodes: [node], duration: 500 });
+                setCurrentSlide_id(node.id);
+            }
         },
-        [fitView],
+        [fitView, isDraggingNode],
     );
 
     const handleKeyPress = useCallback(
@@ -105,6 +109,7 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
                 <ReactFlow 
                     nodes={nodes} 
                     nodeTypes={NODE_TYPES} 
+                    nodesDraggable={false}
                     fitView
                     fitViewOptions={{nodes: [{id: INITIAL_SLIDE}]}}
                     minZoom={0.1}
