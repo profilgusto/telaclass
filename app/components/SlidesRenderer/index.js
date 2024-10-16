@@ -19,11 +19,10 @@ const NODE_TYPES = {
 
 const INITIAL_SLIDE = '0';
 
-const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
+const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentationMode, selectedLesson }) => {
     
     const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
     const [isDraggingNode, setIsDraggingNode] = useState(false);
-    const [initialMousePosition, setInitialMousePosition] = useState(null);
     
 
     // splits the mdx content into splits for each section/slide
@@ -103,6 +102,14 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         }, 50);
     }, [isPresentationMode]); 
 
+    // runs fitView to first slide everytime the selectedLesson changes
+    useEffect(() => {
+        setTimeout(() => {
+            setCurrentSlide_id(INITIAL_SLIDE);
+            fitView({ nodes: [{ id: INITIAL_SLIDE }], duration: 500  });
+        }, 100);
+    }, [selectedLesson]);
+
     return (
         <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`}>
                 <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
@@ -122,14 +129,15 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
 
 
 // I was obliged to create an outer component because of the ReactFlowProvider, that must be outside the ReactFlow component
-const SlidesRenderer = ({ mdxContentSlides, isPresentationMode, onPresentationMode }) => {
-    
+const SlidesRenderer = ({ mdxContentSlides, isPresentationMode, onPresentationMode, selectedLesson }) => {
+
     return (
         <ReactFlowProvider>
             <SlidesRendererInner 
                 mdxContentSlides={mdxContentSlides} 
                 isPresentationMode={isPresentationMode} 
                 onPresentationMode={onPresentationMode}
+                selectedLesson={selectedLesson}
             />
         </ReactFlowProvider>
     );

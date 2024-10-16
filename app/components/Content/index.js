@@ -86,6 +86,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
           mdxContentSlides={mdxContentSlides} 
           isPresentationMode={isPresentationMode}
           onPresentationMode={onPresentationMode}
+          selectedLesson={selectedLesson}
         />
       )}
 
