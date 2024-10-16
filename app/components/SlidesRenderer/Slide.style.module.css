@@ -18,19 +18,19 @@
 }
 
 
-.slide_title {
+.slide_header {
     display: flex;
     flex-direction: column;
     position: relative;
 }
-.slide_title h1 {
+.slide_header h1 {
     font-size: 130px;
     position: absolute;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.slide_title p {
+.slide_header p {
     font-size: 3rem;
     position: absolute;
     top: 60%;

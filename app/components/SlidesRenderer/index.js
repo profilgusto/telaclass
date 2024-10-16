@@ -45,22 +45,38 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         (event) => {
           const currentSlide_node = nodes[currentSlide_id];
      
+
           switch (event.key) {
+
+            // treating to pass slides
+            case 'ArrowUp':
+            case 'ArrowDown':
             case 'ArrowLeft':
             case 'ArrowRight':
 
                 const direction = event.key.slice(5).toLowerCase();
 
-                if (direction == 'left' && currentSlide_node.data.slide_previous_id) {
+                if (direction == 'up' && currentSlide_node.data.slide_previous_id) {
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.slide_previous_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.slide_previous_id }], duration: 500  });
-                } else if (direction == 'right' && currentSlide_node.data.slide_next_id) {
+
+                } else if (direction == 'down' && currentSlide_node.data.slide_next_id) {
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.slide_next_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.slide_next_id }], duration: 500  });
+
+                } else if  (direction == 'left' && currentSlide_node.data.section_previous_id) {
+                    event.preventDefault();
+                    setCurrentSlide_id(currentSlide_node.data.section_previous_id);
+                    fitView({ nodes: [{ id: currentSlide_node.data.section_previous_id }], duration: 500  });                    
+
+                } else if (direction == 'right' && currentSlide_node.data.section_next_id) {                   
+                    event.preventDefault();
+                    setCurrentSlide_id(currentSlide_node.data.section_next_id);
+                    fitView({ nodes: [{ id: currentSlide_node.data.section_next_id }], duration: 500  });
                 }
-          }
+        }
         },
         [currentSlide_id, fitView],
       );
@@ -81,7 +97,7 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         setTimeout(() => {
             fitView({ nodes: [{ id: currentSlide_id }], duration: 500  });
         }, 50);
-    }, [isPresentationMode]);
+    }, [isPresentationMode]); 
 
     return (
         <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`}>

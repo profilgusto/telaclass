@@ -33,7 +33,7 @@ export function Slide( { data } ) {
   );
 
   // determine the slide type (classname) based on the slide type
-  const slideClassStyle = data.content.startsWith('##') ? 'slide_regular' : data.content.startsWith('#') ? 'slide_title' : '';
+  const slideClassStyle = data.content.startsWith('##') ? 'slide_regular' : data.content.startsWith('#') ? 'slide_header' : '';
 
   // resizes the height of the last element of the content to fit the height of the slide
   useEffect(() => {
