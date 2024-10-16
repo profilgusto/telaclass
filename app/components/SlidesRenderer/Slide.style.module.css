@@ -50,8 +50,6 @@
     flex-direction: column;
     overflow: hidden;
     height: 1030px;
-
-    background-color: rgba(0, 255, 255, 0.144);
 }
 .slide_regular .slide__content > * {
     flex: 0 0 auto;
@@ -63,24 +61,20 @@
 .slide_regular .slide__content h2 {
     font-size: 80px;
     margin: 0px 0px 30px 0px;
-    background-color: rgba(188, 143, 143, 0.545);
 }
 .slide_regular .slide__content h3 {
     font-size: 60px;
     margin: 50px 0px 20px 0px;
-    background-color: rgba(188, 143, 143, 0.545);
 }
 .slide_regular .slide__content p {
     font-size: var(--font-size);
     margin-left: var(--margin-left-p);
     margin-top: 5px;
 
-    background-color: rgba(188, 143, 143, 0.545);
 }
 .slide_regular .slide__content ul {
     margin-top: -20px;
     margin-bottom: 60px;
-    background-color: rgba(188, 143, 143, 0.545);
 }
 .slide_regular .slide__content li {
     font-size: var(--font-size);

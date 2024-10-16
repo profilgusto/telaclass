@@ -33,6 +33,8 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
           if (responseTexto.status == FETCH_SUCCESS) {
             const dataTexto = fixMdx(await responseTexto.text(), path_to_modulo);
             setMdxContentText(dataTexto);
+          } else {
+            setMdxContentText(null);
           }
         } catch (error) {
           // TODO Este erro nunca está sendo chamado, pelo menos não quando o arquivo não é encontrado (404)
@@ -47,10 +49,13 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
           if (responseSlides.status == FETCH_SUCCESS) {
             const dataSlides = fixMdx(await responseSlides.text(), path_to_modulo);
             setMdxContentSlides(dataSlides);
+          } else {
+            setMdxContentSlides(null);
           }
 
         } catch (error) {
           // TODO Este erro nunca está sendo chamado, pelo menos não quando o arquivo não é encontrado (404)
+
           console.error(`Erro ao fetchar o arquivo .mdx dos slides. Error message: ${error}`);
           throw error; // Re-throw the error to be caught by the outer catch
         }
@@ -75,14 +80,6 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
       <div className={styles.classTitle}>
         <h1>{modulos[selectedLesson].titulo}</h1>
       </div>
-
-      {/*
-      {mdxContentSlides && (
-        <div className={styles.classSlides}>
-          <MDXRenderer mdxContent={mdxContentSlides} />
-        </div>
-      )}
-      */}
 
       {mdxContentSlides && (
         <SlidesRenderer 

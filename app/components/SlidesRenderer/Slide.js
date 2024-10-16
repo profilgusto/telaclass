@@ -52,9 +52,6 @@ export function Slide( { data } ) {
           // removes the first element of childrenofFirstChild array as it is always a "link" element which is rendered by the MDX Renderer
           contentChildren.shift();
 
-          console.log('cp1');
-          console.log(contentChildren);
-
           // retrieves the last element of the slide
           const lastElement = contentChildren[contentChildren.length - 1];
           
@@ -71,41 +68,9 @@ export function Slide( { data } ) {
             const lastElementNewHeight = computeLastElementSize(refDivContent, contentChildren, lastElement);
             lastElement.style.height = `${lastElementNewHeight}px`;
           }
-
-            //console.log('Achei um iframe!!');
-
-            /*
-            // retrieves the height of refDifContent
-            const RefDifContent_height = refDifContent.current.offsetHeight;
-
-            console.log('cp2');
-            console.log(RefDifContent_height);
-
-            // computes an array that each index is the height of each element summed to the margin to the next element     
-            const heightArray = Array.from(contentChildren).map((element, index, array) => {
-              if (index === array.length - 1) {
-                return element.offsetHeight;
-              }
-            
-              const nextElement = array[index + 1];
-              const effectiveMargin = getEffectiveMargin(element, nextElement);
-            
-              return element.offsetHeight + effectiveMargin;
-            });
-            
-            // computes the height of the last element to fit the slide height
-            const heightPartialSum = heightArray.slice(0, heightArray.length - 1).reduce((acc, height) => acc + height, 0);
-            const lastElementHeight = RefDifContent_height - heightPartialSum;
-
-            // applies the style
-            lastElement.firstChild.style.height = `${lastElementHeight}px`;
-            */
-          //}
-        
         }
       }
     }
-    
   }, [slideRendered]);
 
   // setting the rendered flag
