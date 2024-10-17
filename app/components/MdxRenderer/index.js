@@ -24,6 +24,8 @@ const MDXRenderer = ({ mdxContent }) => {
   // test mdxContent if it has at least one '$' symbol. However, if, and only if, this '$' has a backslacsh before it, like in '\$', it does not count
   const hasEquation = mdxContent.match(/(?<!\\)\$/g) !== null;
 
+  // TODO - Retirar os blocos de comentario antes de compilar
+
   useEffect(() => {
     const renderMDX = async () => {
       const compiled = await compile(await mdxContent, { 

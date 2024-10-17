@@ -63,6 +63,8 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
     fetchMdxContent();
   }, [selectedLesson]);
 
+  // TODO When I change the selectedLesson, the texto content stays where it was scrolled on the last page. Make it go to the beginning when I change classes.
+
 
   // Caso ainda não haja nada selecionado...
   if (selectedLesson==null) {
