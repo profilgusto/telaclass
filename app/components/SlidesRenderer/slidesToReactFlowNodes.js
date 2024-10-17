@@ -43,10 +43,10 @@ const slidesToReactFlowNodes = (slidesContent) => {
         }
 
         // treating neighbors slides index
-        if (index == 0) {
+        if (index === 0) {
             slide_previous_id = null;
             slide_next_id = (index + 1).toString();
-        } else if (index == slidesContent.length - 1) {
+        } else if (index === slidesContent.length - 1) {
             slide_previous_id = (index - 1).toString();
             slide_next_id = null;
         } else {
@@ -70,7 +70,7 @@ const slidesToReactFlowNodes = (slidesContent) => {
     });
     
     // retrieves from nodes the indexes of the slides that are headers
-    const headersIndexes = nodes.map( (node, index) => node.data.slide_type == SLIDE_HEADER ? index : null).filter( (index) => index != null);
+    const headersIndexes = nodes.map( (node, index) => node.data.slide_type === SLIDE_HEADER ? index : null).filter( (index) => index != null);
 
     // treating the section navigation ids
     nodes.forEach((node, index) => {
