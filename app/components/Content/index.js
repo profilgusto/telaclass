@@ -31,7 +31,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
         try {
           responseTexto = await fetch(path_to_modulo + '/texto.mdx');
           if (responseTexto.status == FETCH_SUCCESS) {
-            const dataTexto = fixMdx(await responseTexto.text(), path_to_modulo);
+            const dataTexto = fixMdxLocalImgLinks(await responseTexto.text(), path_to_modulo);
             setMdxContentText(dataTexto);
           } else {
             setMdxContentText(null);
@@ -47,7 +47,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
         try {
           responseSlides = await fetch(path_to_modulo + '/slide.mdx');
           if (responseSlides.status == FETCH_SUCCESS) {
-            const dataSlides = fixMdx(await responseSlides.text(), path_to_modulo);
+            const dataSlides = fixMdxLocalImgLinks(await responseSlides.text(), path_to_modulo);
             setMdxContentSlides(dataSlides);
           } else {
             setMdxContentSlides(null);
@@ -112,13 +112,8 @@ export default Content
 
 
   /* SUPPORT FUNCTIONS */
-const fixMdx = (data, contentBaseUrl) => {
-  // Fixes things in the MDX raw file
-
-  // TODO Pensar numa melhor maneira de modificar o path das imagens pô
-
+const fixMdxLocalImgLinks = (data, contentBaseUrl) => {
   // Fixing the images path to URI, replacing relative local path `./` to the public folder `/` path in React app
-  data = data.replace(/\!\[img\]\(/g, `![img](`+ contentBaseUrl+`/img/`);
-
+  data = data.replace(/\!\[img-local\]\(/g, `![img](`+ contentBaseUrl+`/img/`);
   return data;
 }
