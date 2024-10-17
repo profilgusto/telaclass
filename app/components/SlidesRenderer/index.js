@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { ReactFlow, ReactFlowProvider, useReactFlow } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
@@ -23,7 +23,10 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
     
     const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
     const [isDraggingNode, setIsDraggingNode] = useState(false);
+
+    const reactFlowWrapper = useRef(null);
     
+    // TODO remove this isDraggingNode reference
 
     // splits the mdx content into splits for each section/slide
     const mdxSplits = splitMdxContent(mdxContentSlides);
@@ -46,17 +49,19 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
 
     const handleKeyPress = useCallback(
         (event) => {
-          const currentSlide_node = nodes[currentSlide_id];
-     
 
-          switch (event.key) {
+            console.log(event.key);
 
-            // treating to pass slides
+            event.preventDefault();
+            const currentSlide_node = nodes[currentSlide_id];
+
+          // treating to pass slides
+            switch (event.key) {
             case 'ArrowUp':
             case 'ArrowDown':
             case 'ArrowLeft':
             case 'ArrowRight':
-
+                
                 const direction = event.key.slice(5).toLowerCase();
 
                 if (direction == 'up' && currentSlide_node.data.slide_previous_id) {
@@ -79,11 +84,21 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
                     setCurrentSlide_id(currentSlide_node.data.section_next_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.section_next_id }], duration: 500  });
                 }
-        }
+            }
+
+            // tries to avoid losing focus after a keystroke
+            setTimeout(() => {
+                const reactFlowNode = document.querySelector('.react-flow__node');
+                if (reactFlowNode) {
+                    reactFlowNode.focus();
+                }
+            }, 200);
+
+        
+
         },
         [currentSlide_id, fitView],
       );
-
 
     // button for changing for presentation mode
     const handleButPresentationMode = useCallback(
@@ -110,7 +125,7 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
     }, [selectedLesson]);
 
     return (
-        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`}>
+        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`} ref={reactFlowWrapper} >
                 <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
                 <ReactFlow 
                     nodes={nodes} 
