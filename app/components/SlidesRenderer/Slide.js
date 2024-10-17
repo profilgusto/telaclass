@@ -49,9 +49,6 @@ export function Slide( { data } ) {
           // lists all the content elements in an array
           const contentChildren = Array.from(firstChild.children);
 
-          // removes the first element of childrenofFirstChild array as it is always a "link" element which is rendered by the MDX Renderer
-          contentChildren.shift();
-
           // retrieves the last element of the slide
           const lastElement = contentChildren[contentChildren.length - 1];
           

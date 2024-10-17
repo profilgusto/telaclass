@@ -55,7 +55,6 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
 
         } catch (error) {
           // TODO Este erro nunca está sendo chamado, pelo menos não quando o arquivo não é encontrado (404)
-
           console.error(`Erro ao fetchar o arquivo .mdx dos slides. Error message: ${error}`);
           throw error; // Re-throw the error to be caught by the outer catch
         }

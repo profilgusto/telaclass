@@ -52,8 +52,6 @@ const MDXRenderer = ({ mdxContent }) => {
       }); 
     } */
   }, [content]);
-
-  // TODO retornar o  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css" integrity="sha384-NFTC4wvyQKLwuJ8Ez9AvPNBv8zcC2XaQzXSMvtORKw28BdJbB2QE8Ka+OyrIHcQJ" crossOrigin="anonymous"></link> de forma condicional, apenas se houver equacao no conteudo
   
   return (
     <div ref={mdxContentRef}>

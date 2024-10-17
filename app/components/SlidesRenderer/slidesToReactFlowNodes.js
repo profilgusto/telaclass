@@ -84,10 +84,6 @@ const slidesToReactFlowNodes = (slidesContent) => {
 
 export default slidesToReactFlowNodes;
 
-// TODO Criar uma maneira de inserir vídeos do youtube de forma fácil. Talvez um plugin para o remark. COMO FAZER ISSO? O QUE É REMARK?
-
-// TODO Fazer os slides terem tamanho variável de acordo com o conteúdo? Daí também implementar uma maneira de o ReactFlow ir fazendo zoomfit para as regiões de um slide que tem um tamanho maior que o slide padrão.
-
 function findSurroundingIndexes(valueToTest, indexesValuesArray) {
     let belowIndex = null;
     let aboveIndex = null;

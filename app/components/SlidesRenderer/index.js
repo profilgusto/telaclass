@@ -89,12 +89,11 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
     const handleButPresentationMode = useCallback(
         () => {
             onPresentationMode(!isPresentationMode);
-            // TODO The below fitView is not working properly. It is not fitting the view to the current slide.
-            //fitView({ nodes: [{ id: currentSlide_id }], duration: 500  });
         },
         [isPresentationMode],
     );
 
+    
     // for fitViewing the current slide after changing the SlidesRendererInner size
     useEffect(() => {
         setTimeout(() => {
