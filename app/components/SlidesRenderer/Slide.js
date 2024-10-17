@@ -20,6 +20,7 @@ export function Slide( { data } ) {
   const [contentHeights, setContentHeights] = useState([]);
   const [slideRendered, setSlideRendereed] = useState(false);
 
+  
   // ftting view to another slide based on the given id
   const { fitView } = useReactFlow();
   
@@ -32,13 +33,13 @@ export function Slide( { data } ) {
     [fitView],
   );
 
+
   // determine the slide type (classname) based on the slide type
   const slideClassStyle = data.content.startsWith('##') ? 'slide_regular' : data.content.startsWith('#') ? 'slide_header' : '';
 
+
   // resizes the height of the last element of the content to fit the height of the slide
   useEffect(() => {
-
-
     // only applies this height tweak to regular slides
     if (slideClassStyle === 'slide_regular') {
       // test if there is any content inside the reference
@@ -55,7 +56,6 @@ export function Slide( { data } ) {
           // retrieves the last element of the slide
           const lastElement = contentChildren[contentChildren.length - 1];
           
-
           // --> treats if the last element is an image
           // remarks that it retrieves the child of a p because the MDXRenderer always wraps the images with a <p> tag (IIII doooont know whyyyy)
           if (lastElement && lastElement.tagName === 'P' && lastElement.firstChild.tagName === 'IMG') {
@@ -64,9 +64,9 @@ export function Slide( { data } ) {
           }
 
           // --> treats if the last element is an iframe (youtube videos?, not necessarily)
-          if ( lastElement && lastElement.tagName === 'IFRAME') {
+          if ( lastElement && lastElement.tagName === 'P' && lastElement.firstChild.tagName === 'IFRAME') {
             const lastElementNewHeight = computeLastElementSize(refDivContent, contentChildren, lastElement);
-            lastElement.style.height = `${lastElementNewHeight}px`;
+            lastElement.firstChild.style.height = `${lastElementNewHeight}px`;
           }
         }
       }
