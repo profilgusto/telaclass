@@ -23,7 +23,7 @@ const customRemarkPlugin = () => {
                     attributes: [
                         { type: 'mdxJsxAttribute', name: 'src', value: `https://www.youtube.com/embed/${videoId}` },
                         { type: 'mdxJsxAttribute', name: 'frameBorder', value: '0' },
-                        { type: 'mdxJsxAttribute', name: 'allowFullScreen', value: true }
+                        { type: 'mdxJsxAttribute', name: 'allowFullScreen', value: null }
                     ],
                     children: []
                 };
