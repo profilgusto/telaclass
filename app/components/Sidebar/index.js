@@ -9,11 +9,11 @@ const Sidebar = ( {modulos, onSelectLesson, selectedLesson, isPresentationMode} 
           {modulos.map((aula, index) => (
             <li 
               key={index} 
-              className={selectedLesson == index ? styles.selected: ''}
+              className={selectedLesson === index ? styles.selected: ''}
             >
               <button 
                 onClick={() => onSelectLesson(index)} 
-                className={selectedLesson == index ? styles.selected: ''}
+                className={selectedLesson === index ? styles.selected: ''}
               >
                 {aula.titulo}
               </button>

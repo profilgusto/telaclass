@@ -7,7 +7,7 @@ import styles from './style.module.css';
 
 // CONSTANTS
 const FETCH_SUCCESS = 200;
-const FETCH_NOT_FOUND = 404;
+//const FETCH_NOT_FOUND = 404;
 
 
 const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentationMode, onPresentationMode }) => {
@@ -30,7 +30,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
         let responseTexto;
         try {
           responseTexto = await fetch(path_to_modulo + '/texto.mdx');
-          if (responseTexto.status == FETCH_SUCCESS) {
+          if (responseTexto.status === FETCH_SUCCESS) {
             const dataTexto = fixMdxLocalImgLinks(await responseTexto.text(), path_to_modulo);
             setMdxContentText(dataTexto);
           } else {
@@ -46,7 +46,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
         let responseSlides;
         try {
           responseSlides = await fetch(path_to_modulo + '/slide.mdx');
-          if (responseSlides.status == FETCH_SUCCESS) {
+          if (responseSlides.status === FETCH_SUCCESS) {
             const dataSlides = fixMdxLocalImgLinks(await responseSlides.text(), path_to_modulo);
             setMdxContentSlides(dataSlides);
           } else {
@@ -67,7 +67,7 @@ const Content = ({ modulos, selectedLesson, content_url: contentUrl, isPresentat
 
 
   // Caso ainda não haja nada selecionado...
-  if (selectedLesson==null) {
+  if (selectedLesson===null) {
     return (
       <div className={styles.mainDiv}>
         <h1>Selecione uma aula no menu lateral</h1>

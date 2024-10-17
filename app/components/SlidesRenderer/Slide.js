@@ -16,10 +16,7 @@ const style = {
 
 export function Slide( { data } ) {
   const refDivContent = useRef(null);
-
-  const [contentHeights, setContentHeights] = useState([]);
   const [slideRendered, setSlideRendereed] = useState(false);
-
 
   // ftting view to another slide based on the given id
   const { fitView } = useReactFlow();

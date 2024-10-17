@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ReactFlow, ReactFlowProvider, useReactFlow } from '@xyflow/react';
 
 // import { ReactFlowProvider } from '@xyflow/react';
@@ -7,10 +7,8 @@ import '@xyflow/react/dist/style.css';
 import { Slide } from './Slide';
 import slidesToReactFlowNodes from './slidesToReactFlowNodes.js';
 
-
 // Import styles
 import styles from './style.module.css';
-
 
 // constants
 const NODE_TYPES = {
@@ -22,11 +20,6 @@ const INITIAL_SLIDE = '0';
 const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentationMode, selectedLesson }) => {
     
     const [currentSlide_id, setCurrentSlide_id] = useState(INITIAL_SLIDE);
-    const [isDraggingNode, setIsDraggingNode] = useState(false);
-
-    const reactFlowWrapper = useRef(null);
-    
-    // TODO remove this isDraggingNode reference
 
     // splits the mdx content into splits for each section/slide
     const mdxSplits = splitMdxContent(mdxContentSlides);
@@ -39,19 +32,14 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
     // handles the click on a node
     const handleNodeClick = useCallback(
         (_, node) => {
-            if (!isDraggingNode) {
-                fitView({ nodes: [node], duration: 500 });
-                setCurrentSlide_id(node.id);
-            }
+            fitView({ nodes: [node], duration: 500 });
+            setCurrentSlide_id(node.id);
         },
-        [fitView, isDraggingNode],
+        [fitView],
     );
 
     const handleKeyPress = useCallback(
         (event) => {
-
-            console.log(event.key);
-
             event.preventDefault();
             const currentSlide_node = nodes[currentSlide_id];
 
@@ -64,22 +52,22 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
                 
                 const direction = event.key.slice(5).toLowerCase();
 
-                if (direction == 'up' && currentSlide_node.data.slide_previous_id) {
+                if (direction === 'up' && currentSlide_node.data.slide_previous_id) {
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.slide_previous_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.slide_previous_id }], duration: 500  });
 
-                } else if (direction == 'down' && currentSlide_node.data.slide_next_id) {
+                } else if (direction === 'down' && currentSlide_node.data.slide_next_id) {
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.slide_next_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.slide_next_id }], duration: 500  });
 
-                } else if  (direction == 'left' && currentSlide_node.data.section_previous_id) {
+                } else if  (direction === 'left' && currentSlide_node.data.section_previous_id) {
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.section_previous_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.section_previous_id }], duration: 500  });                    
 
-                } else if (direction == 'right' && currentSlide_node.data.section_next_id) {                   
+                } else if (direction === 'right' && currentSlide_node.data.section_next_id) {                   
                     event.preventDefault();
                     setCurrentSlide_id(currentSlide_node.data.section_next_id);
                     fitView({ nodes: [{ id: currentSlide_node.data.section_next_id }], duration: 500  });
@@ -93,8 +81,6 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
                     reactFlowNode.focus();
                 }
             }, 200);
-
-        
 
         },
         [currentSlide_id, fitView],
@@ -116,6 +102,7 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         }, 50);
     }, [isPresentationMode]); 
 
+
     // runs fitView to first slide everytime the selectedLesson changes
     useEffect(() => {
         setTimeout(() => {
@@ -124,8 +111,9 @@ const SlidesRendererInner = ({ mdxContentSlides, isPresentationMode, onPresentat
         }, 100);
     }, [selectedLesson]);
 
+
     return (
-        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`} ref={reactFlowWrapper} >
+        <div className={`${styles.slidesContainer} ${styles[isPresentationMode ? 'fullScreen' : '']}`} >
                 <button className={styles.but_presentationMode}    onClick={ handleButPresentationMode }>{isPresentationMode ? 'Goto embedded mode' : 'Goto presentation mode'}</button>
                 <ReactFlow 
                     nodes={nodes} 
@@ -166,5 +154,5 @@ function splitMdxContent(mdxContent) {
     return mdxContent
         .split(regex)
         .map(section => section.trim())
-        .filter(section => section != '##' && section != '#');
+        .filter(section => section !== '##' && section !== '#');
 }
