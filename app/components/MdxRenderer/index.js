@@ -21,13 +21,8 @@ const MDXRenderer = ({ mdxContent }) => {
   const [content, setContent] = useState(null);
   const mdxContentRef = useRef(null);
 
-  console.log(mdxContent);
-
   // test mdxContent if it has at least one '$' symbol. However, if, and only if, this '$' has a backslacsh before it, like in '\$', it does not count
   const hasEquation = mdxContent.match(/(?<!\\)\$/g) !== null;
-
-  console.log('CP1');
-  console.log(hasEquation);
 
   useEffect(() => {
     const renderMDX = async () => {
@@ -62,7 +57,7 @@ const MDXRenderer = ({ mdxContent }) => {
   
   return (
     <div ref={mdxContentRef}>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css" integrity="sha384-NFTC4wvyQKLwuJ8Ez9AvPNBv8zcC2XaQzXSMvtORKw28BdJbB2QE8Ka+OyrIHcQJ" crossOrigin="anonymous"></link>
+      { hasEquation && (<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css" integrity="sha384-NFTC4wvyQKLwuJ8Ez9AvPNBv8zcC2XaQzXSMvtORKw28BdJbB2QE8Ka+OyrIHcQJ" crossOrigin="anonymous"></link>) }
       <MDXProvider>{content}</MDXProvider>
     </div>
   );
