@@ -20,7 +20,7 @@ export function Slide( { data } ) {
   const [contentHeights, setContentHeights] = useState([]);
   const [slideRendered, setSlideRendereed] = useState(false);
 
-  
+
   // ftting view to another slide based on the given id
   const { fitView } = useReactFlow();
   
@@ -36,7 +36,6 @@ export function Slide( { data } ) {
 
   // determine the slide type (classname) based on the slide type
   const slideClassStyle = data.content.startsWith('##') ? 'slide_regular' : data.content.startsWith('#') ? 'slide_header' : '';
-
 
   // resizes the height of the last element of the content to fit the height of the slide
   useEffect(() => {
@@ -65,13 +64,17 @@ export function Slide( { data } ) {
 
           // --> treats if the last element is an iframe (youtube videos?, not necessarily)
           if ( lastElement && lastElement.tagName === 'P' && lastElement.firstChild.tagName === 'IFRAME') {
+
+            //console.log('cp1');
+            //console.log(lastElement);
+
             const lastElementNewHeight = computeLastElementSize(refDivContent, contentChildren, lastElement);
             lastElement.firstChild.style.height = `${lastElementNewHeight}px`;
           }
         }
       }
     }
-  }, [slideRendered]);
+  }, [slideRendered, data]);
 
   // setting the rendered flag
   useEffect(() => {

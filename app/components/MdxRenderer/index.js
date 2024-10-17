@@ -14,7 +14,7 @@ import * as runtime from 'react/jsx-runtime'
 import remarkGfm from 'remark-gfm' // Tables, footnotes, strikethrough, task lists, literal URLs.
 import remarkMath from 'remark-math' // Support math like `$so$`.
 import rehypeKatex from 'rehype-katex' // Render math with KaTeX.
-import customRemarkPlugin from './customRemarkPlugin';
+import youtubeVideoRemarkPlugin from './customPlugins/youtubeVideoRemarkPlugin';
 
 
 const MDXRenderer = ({ mdxContent }) => {
@@ -26,7 +26,7 @@ const MDXRenderer = ({ mdxContent }) => {
       const compiled = await compile(await mdxContent, { 
           outputFormat: 'function-body',
           rehypePlugins: [rehypeKatex], 
-          remarkPlugins: [remarkMath, remarkGfm, customRemarkPlugin],
+          remarkPlugins: [remarkMath, remarkGfm, youtubeVideoRemarkPlugin],
        });
       const {default: ContentMdx} = await run(compiled, {...runtime, baseUrl: import.meta.url});
       setContent(<ContentMdx />);
