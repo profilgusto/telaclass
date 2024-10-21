@@ -98,6 +98,11 @@
 }
 
 
+  /* Para equações em linha própra - fiz gambiarra de só pegar um span dentro de outro pois o seletor .katex não estava funcionando */
+.slide_regular .slide__content span span{
+    font-size: 50px;
+}
+
 
 .slide__controls {
     position: absolute;
