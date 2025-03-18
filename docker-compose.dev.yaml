@@ -7,8 +7,7 @@ services:
     container_name: telaclass_react-app-c-dev
     volumes:
       - ./app:/app
-      - /Users/filgusto/pcloud-sync/ufsj/disciplinas/ENM704_sistemas-supervisorios/material/content-telaclass:/app/public/content-telaclass
-     #- /Users/filgusto/Desktop/content-telaclass_template:/app/public/content-telaclass
+      - /Users/filiperocha/pcloud-sync/ufsj/disciplinas/sistemas-supervisórios/material/content-telaclass:/app/public/content-telaclass
     ports: 
       - "3000:3000"
     command: ["/bin/sh", "-c", "npm install && npm run dev"]
